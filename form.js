@@ -1,4 +1,3 @@
-<script>
   var HomeAddress = HomeAddress || [];
   var componentForm = [
     "street_number",
@@ -79,9 +78,7 @@
   for (var i = 0; i <= HomeAddress.length; i++) {
     document.getElementById(componentForm[i]).value = HomeAddress[i];
   }
-</script>
 
-<script>
   function displayOne() {
     for (var i = 0; i <= 2; i++) {
       var apartmenti = document.getElementById("isapartment" + i);
@@ -95,9 +92,7 @@
       }
     }  
   }
-</script>
 
-<script>
   $('.input-number-increment').click(function() {
     var $input = $(this).parents('.form-input-card').find('.input-number');
     var val = parseInt($input.val(), 10);
@@ -116,9 +111,7 @@
       $input.val(1, 10);
     }
   })
-</script>
 
-<script>
   var Webflow = Webflow || [];
   Webflow.push(function() {
     var l = $('#flowbaseSlider .w-slider-arrow-left');
@@ -131,9 +124,7 @@
       r.trigger('tap');
     });
   });
-</script>
 
-<script>
   $('#startbutton').prop('disabled', true);
   document.getElementById("startbutton").style.color = "#62636b";
   document.getElementById("startbutton").style.backgroundColor = "#f8f6f4";
@@ -149,9 +140,7 @@
       }
     });
   });
-</script>
 
-<script>
   $('#buttonslide2').prop('disabled', true);
   document.getElementById("buttonslide2").style.color = "#62636b";
   document.getElementById("buttonslide2").style.backgroundColor = "#f8f6f4";
@@ -167,9 +156,7 @@
       }
     });
   });
-</script>
 
-<script>
   $('#buttonslide3').prop('disabled', true);
   var buttonslide3 = document.getElementById("buttonslide3");
   buttonslide3.style.color = "#62636b";
@@ -247,4 +234,3 @@
       }
     });
   });
-</script>
