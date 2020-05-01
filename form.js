@@ -294,7 +294,7 @@ $('.input-number-decrement').click(function() {
   } else {
     $input.val(1, 10);
   }
-})
+});
 
 $('#up').click(function() {
   var val1 = parseInt($('#roomcnt').val(), 10);
@@ -423,24 +423,23 @@ buttonslide5.style.backgroundColor = "#f8f6f4";
 buttonslide5.style.opacity = "0.5";
 
 $('#up33').click(function() {
-  var $input = $(this).parents('.form-input-card').find('.input-number');
-  var val = parseInt($input.val(), 10);
-  if (val) {
-    $input.val(Math.min(val + 1, 10));
+  var valup33 = parseInt($('#housefloorscnt').val(), 10);
+  if (valup33) {
+    $('#housefloorscnt').val(Math.min(valup33 + 1, 10));
   } else {
-    $input.val(1, 10);
+    $('#housefloorscnt').val(1, 10);
   }
 });
 
 $('#down33').click(function() {
-  var $input = $(this).parents('.form-input-card').find('.input-number');
-  var val = parseInt($input.val(), 10);
-  if (val) {
-    $input.val(Math.max(val - 1, 0));
+  var valdown33 = parseInt($('#housefloorscnt').val(), 10);
+  alert(valdown33);
+  if (valdown33) {
+    $('#housefloorscnt').val(Math.max(valdown33 - 1, 0));
   } else {
-    $input.val(0, 10);
+    $('#housefloorscnt').val(0, 10);
   }
-})
+});
 
 $('#housefloorscnt').change(function() {
   var val = parseInt($('#housefloorscnt').val(), 10);
