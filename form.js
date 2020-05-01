@@ -15,7 +15,7 @@ var cookieArr = document.cookie.split(";");
 // Loop through the array elements
 for (var i = 0; i < cookieArr.length; i++) {
   var cookiePair = cookieArr[i].split("=");
-  var cookieidentifier = cookiePair[0].trim()
+  var cookieidentifier = cookiePair[0].trim();
   if (cookieidentifier == componentForm[0]){
     HomeAddress.push(cookiePair[1]);
     break;
@@ -24,7 +24,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 
 for (var i = 0; i < cookieArr.length; i++) {
   var cookiePair = cookieArr[i].split("=");
-  var cookieidentifier = cookiePair[0].trim()
+  var cookieidentifier = cookiePair[0].trim();
   if (cookieidentifier == componentForm[1]){
     HomeAddress.push(cookiePair[1]);
     break;
@@ -33,7 +33,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 
 for (var i = 0; i < cookieArr.length; i++) {
   var cookiePair = cookieArr[i].split("=");
-  var cookieidentifier = cookiePair[0].trim()
+  var cookieidentifier = cookiePair[0].trim();
   if (cookieidentifier == componentForm[2]){
     HomeAddress.push(cookiePair[1]);
     break;
@@ -42,7 +42,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 
 for (var i = 0; i < cookieArr.length; i++) {
   var cookiePair = cookieArr[i].split("=");
-  var cookieidentifier = cookiePair[0].trim()
+  var cookieidentifier = cookiePair[0].trim();
   if (cookieidentifier == componentForm[3]){
     HomeAddress.push(cookiePair[1]);
     break;
@@ -51,7 +51,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 
 for (var i = 0; i < cookieArr.length; i++) {
   var cookiePair = cookieArr[i].split("=");
-  var cookieidentifier = cookiePair[0].trim()
+  var cookieidentifier = cookiePair[0].trim();
   if (cookieidentifier == componentForm[4]){
     HomeAddress.push(cookiePair[1]);
     break;
@@ -60,7 +60,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 
 for (var i = 0; i < cookieArr.length; i++) {
   var cookiePair = cookieArr[i].split("=");
-  var cookieidentifier = cookiePair[0].trim()
+  var cookieidentifier = cookiePair[0].trim();
   if (cookieidentifier == componentForm[5]){
     HomeAddress.push(cookiePair[1]);
     break;
@@ -80,7 +80,7 @@ for (var i = 0; i <= HomeAddress.length; i++) {
 function displayOne() {
   for (var i = 0; i <= 2; i++) {
     var apartmenti = document.getElementById("isapartment" + i);
-    var housei = document.getElementById("ishouse" + i)
+    var housei = document.getElementById("ishouse" + i);
     if (document.getElementById("apartment").checked) {
       housei.style.display = "none";
       apartmenti.style.display = "initial";
