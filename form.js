@@ -193,7 +193,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#availablelandsizesqft").keyup(function() {
-		if ($("#availablelandsizesqft").val() <= 10000 && $("#availablelandsizesqft").val() >= 0) {
+		if ($("#availablelandsizesqft").val() <= 10000 && $("#availablelandsizesqft").val() >= 1) {
 			document.getElementById("divavailablelandsizesqft").style.borderColor = "#f8f6f4";
 			document.getElementById("error1availablelandsizesqft").style.display = 'none';
 			document.getElementById("error2availablelandsizesqft").style.display = 'none';
