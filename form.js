@@ -425,13 +425,12 @@ $('#up33').click(function() {
 	if (valup33) {
 		$('#housefloorscnt').val(Math.min(valup33 + 1, 10));
 	} else {
-		$('#housefloorscnt').val(0, 10);
+		$('#housefloorscnt').val(1, 10);
 	}
 });
 
 $('#down33').click(function() {
 	var valdown33 = parseInt($('#housefloorscnt').val(), 10);
-  alert(valdown33);
 	if (valdown33) {
 		$('#housefloorscnt').val(Math.max(valdown33 - 1, 0));
 	} else {
@@ -459,7 +458,7 @@ $('#up11').click(function() {
 		}
 	} else {
 		if (!val2) {
-			$('#buildingfloorscnt').val(0, 10);
+			$('#buildingfloorscnt').val(1, 10);
 		} else {
 			$('#buildingfloorscnt').val(Math.max(val2, 0));
 		}
@@ -477,7 +476,7 @@ $('#down11').click(function() {
 		}
 	} else {
 		if (!val2) {
-			$('#buildingfloorscnt').val(0, 10);
+			$('#buildingfloorscnt').val(1, 10);
 		} else {
 			$('#buildingfloorscnt').val(Math.max(val2, 0));
 		}
@@ -495,7 +494,7 @@ $('#up22').click(function() {
 		}
 	} else {
 		if (!val1) {
-			$('#floorscnt').val(0, 10);
+			$('#floorscnt').val(1, 10);
 		} else {
 			$('#floorscnt').val(Math.min(val1, 0));
 		}
@@ -571,7 +570,7 @@ $('.upslide6').click(function() {
 	if (val) {
 		$input.val(Math.min(val + 1, 10));
 	} else {
-		$input.val(0, 10);
+		$input.val(1, 10);
 	}
 });
 
