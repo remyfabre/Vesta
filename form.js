@@ -281,7 +281,7 @@ $('#up1').click(function() {
 	if (val) {
 		$('#bathroomcnt').val(Math.min(val + 1, 20));
 	} else {
-		$('#bathroomcnt').val(2, 10);
+		$('#bathroomcnt').val(1, 10);
 	}
 });
 
@@ -425,7 +425,7 @@ $('#up33').click(function() {
 	if (valup33) {
 		$('#housefloorscnt').val(Math.min(valup33 + 1, 10));
 	} else {
-		$('#housefloorscnt').val(1, 10);
+		$('#housefloorscnt').val(0, 10);
 	}
 });
 
@@ -459,9 +459,9 @@ $('#up11').click(function() {
 		}
 	} else {
 		if (!val2) {
-			$('#buildingfloorscnt').val(1, 10);
+			$('#buildingfloorscnt').val(0, 10);
 		} else {
-			$('#buildingfloorscnt').val(Math.max(val2, 1));
+			$('#buildingfloorscnt').val(Math.max(val2, 0));
 		}
 	}
 });
@@ -495,9 +495,9 @@ $('#up22').click(function() {
 		}
 	} else {
 		if (!val1) {
-			$('#floorscnt').val(1, 10);
+			$('#floorscnt').val(0, 10);
 		} else {
-			$('#floorscnt').val(Math.min(val1, 1));
+			$('#floorscnt').val(Math.min(val1, 0));
 		}
 	}
 });
@@ -571,7 +571,7 @@ $('.upslide6').click(function() {
 	if (val) {
 		$input.val(Math.min(val + 1, 10));
 	} else {
-		$input.val(1, 10);
+		$input.val(0, 10);
 	}
 });
 
