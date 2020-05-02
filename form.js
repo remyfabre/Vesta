@@ -193,7 +193,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#availablelandsizesqft").keyup(function() {
-		if ($("#availablelandsizesqft").val() <= 10000 && $("#availablelandsizesqft").val() >= 1) {
+		if ($("#availablelandsizesqft").val() <= 10000 && $("#availablelandsizesqft").val() >= 0) {
 			document.getElementById("divavailablelandsizesqft").style.borderColor = "#f8f6f4";
 			document.getElementById("error1availablelandsizesqft").style.display = 'none';
 			document.getElementById("error2availablelandsizesqft").style.display = 'none';
@@ -256,7 +256,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide3").change(function() {
+	$("#formcontentslide3").keyup(function() {
 		var buttonslide3 = document.getElementById("buttonslide3");
 		if (bool1 == true && bool2 == true && bool3 == true && bool5 == true) {
 			$('#buttonslide3').prop('disabled', false);
