@@ -74,7 +74,9 @@ document.getElementById("Home Address 3").innerHTML = (HomeAddress[5]);
 // Get each component of the address from the place details,
 // and then fill-in the corresponding field on the form.
 for (var i = 0; i <= HomeAddress.length; i++) {
-	document.getElementById(componentForm[i]).value = HomeAddress[i];
+	if (document.getElementById(componentForm[i]) !== null) {
+		document.getElementById(componentForm[i]).value = HomeAddress[i];
+	}	
 }
 
 function displayOne() {
