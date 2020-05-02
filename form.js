@@ -155,17 +155,17 @@ $(document).ready(function() {
 			document.getElementById("divhousesizesqft").style.borderColor = "#f8f6f4";
 			document.getElementById("error1housesizesqft").style.display = 'none';
 			document.getElementById("error2housesizesqft").style.display = 'none';
-			return bool1 = true;
+			bool1 = true;
 		} else if (!$("#housesizesqft").val()) {
 			document.getElementById("divhousesizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error1housesizesqft").style.display = 'none';
 			document.getElementById("error2housesizesqft").style.display = 'block';
-			return bool1 = false;
+			bool1 = false;
 		} else {
 			document.getElementById("divhousesizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error2housesizesqft").style.display = 'none';
 			document.getElementById("error1housesizesqft").style.display = 'block';
-			return bool1 = false;
+			bool1 = false;
 		}
 	});
 });
@@ -176,17 +176,17 @@ $(document).ready(function() {
 			document.getElementById("divlandsizesqft").style.borderColor = "#f8f6f4";
 			document.getElementById("error1landsizesqft").style.display = 'none';
 			document.getElementById("error2landsizesqft").style.display = 'none';
-			return bool2 = true;
+			bool2 = true;
 		} else if (!$("#landsizesqft").val()) {
 			document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error1landsizesqft").style.display = 'none';
 			document.getElementById("error2landsizesqft").style.display = 'block';
-			return bool2 = false;
+			bool2 = false;
 		} else {
 			document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error2landsizesqft").style.display = 'none';
 			document.getElementById("error1landsizesqft").style.display = 'block';
-			return bool2 = false;
+			bool2 = false;
 		}
 	});
 });
@@ -197,17 +197,17 @@ $(document).ready(function() {
 			document.getElementById("divavailablelandsizesqft").style.borderColor = "#f8f6f4";
 			document.getElementById("error1availablelandsizesqft").style.display = 'none';
 			document.getElementById("error2availablelandsizesqft").style.display = 'none';
-			return bool3 = true;
+			bool3 = true;
 		} else if (!$("#availablelandsizesqft").val()) {
 			document.getElementById("divavailablelandsizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error1availablelandsizesqft").style.display = 'none';
 			document.getElementById("error2availablelandsizesqft").style.display = 'block';
-			return bool3 = false;
+			bool3 = false;
 		} else {
 			document.getElementById("divavailablelandsizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error2availablelandsizesqft").style.display = 'none';
 			document.getElementById("error1availablelandsizesqft").style.display = 'block';
-			return bool3 = false;
+			bool3 = false;
 		}
 	});
 });
@@ -218,17 +218,17 @@ $(document).ready(function() {
 			document.getElementById("divapartmentsizesqft").style.borderColor = "#f8f6f4";
 			document.getElementById("error1apartmentsizesqft").style.display = 'none';
 			document.getElementById("error2apartmentsizesqft").style.display = 'none';
-			return bool4 = true;
+			bool4 = true;
 		} else if (!$("#apartmentsizesqft").val()) {
 			document.getElementById("divapartmentsizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error1apartmentsizesqft").style.display = 'none';
 			document.getElementById("error2apartmentsizesqft").style.display = 'block';
-			return bool4 = false;
+			bool4 = false;
 		} else {
 			document.getElementById("divapartmentsizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error2apartmentsizesqft").style.display = 'none';
 			document.getElementById("error1apartmentsizesqft").style.display = 'block';
-			return bool4 = false;
+			bool4 = false;
 		}
 	});
 });
@@ -240,7 +240,6 @@ $(document).ready(function() {
 			document.getElementById("error1livingareasizesqft").style.display = 'none';
 			document.getElementById("error2livingareasizesqft").style.display = 'none';
 			bool5 = true;
-      return 
 		} else if (!$("#livingareasizesqft").val()) {
 			document.getElementById("divlivingareasizesqft").style.borderColor = "#ed6a5e";
 			document.getElementById("error1livingareasizesqft").style.display = 'none';
@@ -257,7 +256,6 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#formcontentslide3").keyup(function() {
-		var buttonslide3 = document.getElementById("buttonslide3");
 		if (bool1 == true && bool2 == true && bool3 == true && bool5 == true) {
 			$('#buttonslide3').prop('disabled', false);
 			buttonslide3.style.color = "#ffffff";
