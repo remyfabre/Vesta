@@ -472,13 +472,13 @@ $('#down11').click(function() {
 		if (val1 <= val2) {
 			$('#buildingfloorscnt').val($('#floorscnt').val());
 		} else {
-			$('#buildingfloorscnt').val(Math.max(val1 - 1, 0));
+			$('#buildingfloorscnt').val(Math.max(val1 - 1, 1));
 		}
 	} else {
 		if (!val2) {
 			$('#buildingfloorscnt').val(1, 10);
 		} else {
-			$('#buildingfloorscnt').val(Math.max(val2, 0));
+			$('#buildingfloorscnt').val(Math.max(val2, 1));
 		}
 	}
 });
@@ -496,7 +496,7 @@ $('#up22').click(function() {
 		if (!val1) {
 			$('#floorscnt').val(1, 10);
 		} else {
-			$('#floorscnt').val(Math.min(val1, 0));
+			$('#floorscnt').val(Math.min(val1, 1));
 		}
 	}
 });
@@ -523,7 +523,7 @@ $('#buildingfloorscnt').change(function() {
 	var val = parseInt($('#buildingfloorscnt').val(), 10);
 	var val2 = parseInt($('#floorscnt').val(), 10);
 	if (val < 0) {
-		$('#buildingfloorscnt').val(0);
+		$('#buildingfloorscnt').val(1);
 	} else if (val >= 10) {
 		$('#buildingfloorscnt').val(10);
 	} else if (val <= val2) {
