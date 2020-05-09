@@ -398,7 +398,7 @@ $('#bedroomcnt').keyup(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide4").click(function() {
+	$("#formcontentslide4").on("click keyup", function() {
 		var buttonslide4 = document.getElementById("buttonslide4");
 		if ($('#roomcnt').val() && $('#bathroomcnt').val() && $('#bedroomcnt').val()) {
 			$('#buttonslide4').prop('disabled', false);
@@ -542,7 +542,7 @@ $('#floorscnt').keyup(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide5").click(function() {
+	$("#formcontentslide5").on("click keyup", function() {
 		var buttonslide5 = document.getElementById("buttonslide5");
 		if ($('#floorscnt').val() && $('#buildingfloorscnt').val() || $('#housefloorscnt').val()) {
 			$('#buttonslide5').prop('disabled', false);
@@ -595,7 +595,7 @@ $('.inputslide6').keyup(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide6").click(function() {
+	$("#formcontentslide6").on("click keyup", function() {
 		var buttonslide6 = document.getElementById("buttonslide6");
 		if ($('#boxgaragecnt').val() && $('#garagecarcnt').val()) {
 			$('#buttonslide6').prop('disabled', false);
