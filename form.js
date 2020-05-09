@@ -366,7 +366,7 @@ $('#down2').click(function() {
 	}
 });
 
-$('#roomcnt').change(function() {
+$('#roomcnt').keyup(function() {
 	var val = parseInt($('#roomcnt').val(), 10);
 	var val2 = parseInt($('#bedroomcnt').val(), 10);
 	if (val < 1) {
@@ -378,7 +378,7 @@ $('#roomcnt').change(function() {
 	}
 });
 
-$('#bathroomcnt').change(function() {
+$('#bathroomcnt').keyup(function() {
 	var val = parseInt($('#bathroomcnt').val(), 10);
 	if (val < 1) {
 		$('#bathroomcnt').val(1);
@@ -387,7 +387,7 @@ $('#bathroomcnt').change(function() {
 	}
 });
 
-$('#bedroomcnt').change(function() {
+$('#bedroomcnt').keyup(function() {
 	var val = parseInt($('#roomcnt').val(), 10);
 	var val2 = parseInt($('#bedroomcnt').val(), 10);
 	if (val2 < 1) {
@@ -438,7 +438,7 @@ $('#down33').click(function() {
 	}
 });
 
-$('#housefloorscnt').change(function() {
+$('#housefloorscnt').keyup(function() {
 	var val = parseInt($('#housefloorscnt').val(), 10);
 	if (val < 1) {
 		$('#housefloorscnt').val(0);
@@ -519,7 +519,7 @@ $('#down22').click(function() {
 	}
 });
 
-$('#buildingfloorscnt').change(function() {
+$('#buildingfloorscnt').keyup(function() {
 	var val = parseInt($('#buildingfloorscnt').val(), 10);
 	var val2 = parseInt($('#floorscnt').val(), 10);
 	if (val < 0) {
@@ -531,7 +531,7 @@ $('#buildingfloorscnt').change(function() {
 	}
 });
 
-$('#floorscnt').change(function() {
+$('#floorscnt').keyup(function() {
 	var val = parseInt($('#buildingfloorscnt').val(), 10);
 	var val2 = parseInt($('#floorscnt').val(), 10);
 	if (val2 < 0) {
@@ -584,7 +584,7 @@ $('.downslide6').click(function() {
 	}
 });
 
-$('.inputslide6').change(function() {
+$('.inputslide6').keyup(function() {
 	var $input = $(this).parents('.form-input-card').find('.inputslide6');
 	var val = parseInt($input.val(), 10);
 	if (val < 1) {
