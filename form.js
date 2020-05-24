@@ -10,59 +10,53 @@ var componentForm = [
 
 // A custom function to get cookies
 // Split cookie string and get all individual name=value pairs in an array
-var cookieArr = document.cookie.split(";");
-
+var cookieArr = document.cookie.split(';');
 // Loop through the array elements
 for (var i = 0; i < cookieArr.length; i++) {
-	var cookiePair = cookieArr[i].split("=");
+	var cookiePair = cookieArr[i].split('=');
 	var cookieidentifier = cookiePair[0].trim();
 	if (cookieidentifier == componentForm[0]) {
-		HomeAddress.push(cookiePair[1]);
+		HomeAddress.push(decodeURIComponent(cookiePair[1]));
 		break;
 	}
 }
-
 for (var i = 0; i < cookieArr.length; i++) {
-	var cookiePair = cookieArr[i].split("=");
+	var cookiePair = cookieArr[i].split('=');
 	var cookieidentifier = cookiePair[0].trim();
 	if (cookieidentifier == componentForm[1]) {
-		HomeAddress.push(cookiePair[1]);
+		HomeAddress.push(decodeURIComponent(cookiePair[1]));
 		break;
 	}
 }
-
 for (var i = 0; i < cookieArr.length; i++) {
-	var cookiePair = cookieArr[i].split("=");
+	var cookiePair = cookieArr[i].split('=');
 	var cookieidentifier = cookiePair[0].trim();
 	if (cookieidentifier == componentForm[2]) {
-		HomeAddress.push(cookiePair[1]);
+		HomeAddress.push(decodeURIComponent(cookiePair[1]));
 		break;
 	}
 }
-
 for (var i = 0; i < cookieArr.length; i++) {
-	var cookiePair = cookieArr[i].split("=");
+	var cookiePair = cookieArr[i].split('=');
 	var cookieidentifier = cookiePair[0].trim();
 	if (cookieidentifier == componentForm[3]) {
-		HomeAddress.push(cookiePair[1]);
+		HomeAddress.push(decodeURIComponent(cookiePair[1]));
 		break;
 	}
 }
-
 for (var i = 0; i < cookieArr.length; i++) {
-	var cookiePair = cookieArr[i].split("=");
+	var cookiePair = cookieArr[i].split('=');
 	var cookieidentifier = cookiePair[0].trim();
 	if (cookieidentifier == componentForm[4]) {
-		HomeAddress.push(cookiePair[1]);
+		HomeAddress.push(decodeURIComponent(cookiePair[1]));
 		break;
 	}
 }
-
 for (var i = 0; i < cookieArr.length; i++) {
-	var cookiePair = cookieArr[i].split("=");
+	var cookiePair = cookieArr[i].split('=');
 	var cookieidentifier = cookiePair[0].trim();
 	if (cookieidentifier == componentForm[5]) {
-		HomeAddress.push(cookiePair[1]);
+		HomeAddress.push(decodeURIComponent(cookiePair[1]));
 		break;
 	}
 }
