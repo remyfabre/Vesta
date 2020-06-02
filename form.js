@@ -423,13 +423,20 @@ $('#up33').click(function() {
 	}
 });
 
+$('#housefloorscnt').keypress(function(e) {
+    e.preventDefault();
+});
+
 $('#down33').click(function() {
-	var valdown33 = parseInt($('#housefloorscnt').val(), 10);
-	if (valdown33) {
-		$('#housefloorscnt').val(Math.max(valdown33 - 1, 0));
-	} else {
-		$('#housefloorscnt').val(0, 10);
-	}
+  var valdown33 = parseInt($('#housefloorscnt').val(), 10);
+  if (valdown33) {
+    $('#housefloorscnt').val(Math.max(valdown33 - 1, 0));
+    if(parseInt($('#housefloorscnt').val(), 10) == 0) {
+      $('#housefloorscnt').val("Plain-pied");
+    }
+  } else {
+    $('#housefloorscnt').val(0, 10);
+  }
 });
 
 $('#housefloorscnt').keyup(function() {
