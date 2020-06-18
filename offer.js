@@ -8,8 +8,7 @@ function redirect() {
 
 function hideLoader() {
   $(document).ready(function() {
-  	alert("I went there bro")
-    $('#loading').hide();
+    $('#loading').fadeOut();
   });
 }
 
