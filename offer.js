@@ -243,7 +243,6 @@ function resize(){
   });
 }
 
-
 $(document).ready(function() {
   var substr = "criteria-"
   var list = ["Pièces", "Salles de bain", "Étages", "Chambres", "Places de Parking"]
