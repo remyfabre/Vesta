@@ -43,6 +43,9 @@ $(document).ready(function() {
   $(".id-calendy").on('click', function() {
     Calendly.showPopupWidget('https://calendly.com/wevesta/introduction')
   });
+  if(parseInt(getBrowserSize().width) > 991 && parseInt(getBrowserSize().width) < 1150){
+    $("#map").hide();
+  }
 });
 
 document.getElementById('type-comps').innerHTML = document.getElementById('Type').innerHTML + "s"
@@ -241,6 +244,26 @@ function resize(){
     $("#card-label-0").height(height_card)
     $("#card-label-1").height(height_card)
   });
+}
+
+function getBrowserSize(){
+  var w, h;
+
+  if(typeof window.innerWidth != 'undefined')
+  {
+    w = window.innerWidth; //other browsers
+    h = window.innerHeight;
+  } 
+  else if(typeof document.documentElement != 'undefined' && typeof      document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0) 
+  {
+    w =  document.documentElement.clientWidth; //IE
+    h = document.documentElement.clientHeight;
+  }
+  else{
+    w = document.body.clientWidth; //IE
+    h = document.body.clientHeight;
+  }
+  return {'width':w, 'height': h};
 }
 
 $(document).ready(function() {
