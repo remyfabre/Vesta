@@ -1,12 +1,14 @@
-function redirect() 
-{  
+document.getElementById("loading").addEventListener("load", redirect());
+
+function redirect() {
   window.setTimeout(function() {
     hideLoader();
-  }, 3000);   
-} 
+  }, 3000);
+}
 
 function hideLoader() {
   $(document).ready(function() {
+  	alert("I went there bro")
     $('#loading').hide();
   });
 }
