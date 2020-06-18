@@ -9,6 +9,7 @@ function redirect() {
 function hideLoader() {
   $(document).ready(function() {
     $('#loading').fadeOut();
+    $('#loader').fadeOut();
   });
 }
 
