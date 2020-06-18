@@ -35,6 +35,11 @@ $(document).ready(function() {
       behavior: 'smooth'
     });
   });
+  $("#referral-1").click(function() {
+    document.getElementById("referral-2").scrollIntoView({
+    behavior:"smooth", inline: "center", block: "center"
+    });
+  });
   $(".id-calendy").on('click', function() {
     Calendly.showPopupWidget('https://calendly.com/wevesta/introduction')
   });
@@ -99,10 +104,12 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
   if (value <= 175) {
     var costguarantee = 8;
     var costoffre = costguarantee*2;
+    var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-2').innerHTML = (value - costguarantee).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = costguarantee.toString() + " 000 €";
     document.getElementById('slider-range-value-3').innerHTML = (value - costoffre).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = costoffre.toString() + " 000 €";
+    document.getElementById('value-proposition-1-2').innerHTML = txt
   } else if (value > 160 && value <= 400) {
     var costguarantee = 0.045;
     var costoffre = costguarantee*2;
@@ -235,3 +242,16 @@ function resize(){
     $("#card-label-1").height(height_card)
   });
 }
+
+$(document).ready(function() {
+  var substr = "criteria-"
+  var list = ["Pièces", "Salles de bain", "Étages", "Chambres", "Places de Parking"]
+  for (let i =0; i <= 7; i++) {
+    alert(i);
+    alert("#" + substr + (i+1).toString() +"-a");
+    alert($("#" + substr + (i+1).toString() +"-a").html());
+    if (Number($("#" + substr + (i+1).toString() +"-a").html()) > 1 ) {
+      $("#" + substr + (i+1).toString() +"-b").html($(list).get(i));
+    }
+  }
+});
