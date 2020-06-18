@@ -1,3 +1,16 @@
+function redirect() 
+{  
+  window.setTimeout(function() {
+    hideLoader();
+  }, 3000);   
+} 
+
+function hideLoader() {
+  $(document).ready(function() {
+    $('#loading').hide();
+  });
+}
+
 $(document).ready(function() {
   $(".id-1").click(function() {
     $("#vesta-guarantee").hide();
