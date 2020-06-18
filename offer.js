@@ -150,11 +150,11 @@ rangeSlider2.noUiSlider.on('update', function(values, handle) {
     document.getElementById('cost-of-service-5').innerHTML = (costguarantee*100).toString() + "%";
   } else if (value > 400 && value <= 600) {
     var costguarantee = 0.04;
-    document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
+    document.getElementById('slider-range-value-5').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-5').innerHTML = (costguarantee*100).toString() + "%";
   } else {
     var costguarantee = 0.035;
-    document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
+    document.getElementById('slider-range-value-5').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-5').innerHTML = (costguarantee*100).toString() + "%";
   }
 });
