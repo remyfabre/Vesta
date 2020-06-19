@@ -210,12 +210,9 @@ const asynchronousFunction = async (app_key, AddressKey, url_p2) => {
 }
 
 const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
-	alert(IDKey);
   const response_comps = await getToken(app_key, IDKey, url_p4, url_p5);
   var size = Object.keys(response_comps['data']['records']).length
   var new_var = 0
-
-	alert(JSON.stringify(response_comps['data']['records']))
   
   for (let step = 0; step < size; step++) {
     if(!response_comps['data']['records'][new_var]['fields']['Checkbox comps']){
