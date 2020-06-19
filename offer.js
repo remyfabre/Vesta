@@ -73,7 +73,6 @@ var rangeSlider2 = document.getElementById('slider-2');
 var rangeSlider3 = document.getElementById('slider-3');
 
 // implement html modifications
-document.getElementById('pourcentage-plusone').innerHTML = Math.round(costguarantee * 100 + 1).toString() + "%";
 document.getElementById('value').innerHTML = min.toString() + "-" + max.toString() + " k€";
 
 noUiSlider.create(rangeSlider, {
@@ -125,14 +124,20 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-2').innerHTML = (value - costguarantee).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = costguarantee.toString() + " 000 €";
+    document.getElementById('pourcentage-2').innerHTML = costguarantee.toString() + " 000 € de";
     document.getElementById('slider-range-value-3').innerHTML = (value - costoffre).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = costoffre.toString() + " 000 €";
+    document.getElementById("pourcentage-3").innerHTML = costoffre.toString() + " 000 € de";
     document.getElementById('value-proposition-1-2').innerHTML = txt
   } else if (value > 160 && value <= 400) {
     var costguarantee = 0.045;
     var costoffre = costguarantee*2;
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString() + "%";
+    
+    document.getElementById('pourcentage-2').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-2-b').innerHTML = (costguarantee*100).toString() + "%";
+    
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costoffre*100).toString() + "%";
   } else if (value > 400 && value <= 600) {
@@ -140,15 +145,24 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     var costoffre = costguarantee*2;
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-2').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-2-b').innerHTML = (costguarantee*100).toString() + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costoffre*100).toString() + "%";
+    document.getElementById('pourcentage-3').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-3-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    
   } else {
     var costguarantee = 0.035;
     var costoffre = costguarantee*2;
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-2').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-2-b').innerHTML = (costguarantee*100).toString() + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costoffre*100).toString() + "%";
+    document.getElementById('pourcentage-3').innerHTML = (costguarantee*100).toString() + "%";
+    document.getElementById('pourcentage-3-b').innerHTML =  (costguarantee*100+1).toString() + "%";
   }
 });
 
