@@ -116,7 +116,6 @@ noUiSlider.create(rangeSlider2, {
 
 rangeSlider.noUiSlider.on('update', function(values, handle) {
   var value = Math.round(values[handle])
-  alert(value);
   document.getElementById('slider-range-value').innerHTML = value.toString() + " 000 €";
   if (value <= 175) {
     var costguarantee = 8;
