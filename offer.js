@@ -239,6 +239,9 @@ const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
   
   if(Object.keys(response_comps['data']['records']).length <= 4){
     hide(); var size = 2;
+    if(Object.keys(response_comps['data']['records']).length <= 1){
+      hide_div();
+    }
   } else {
     var size = 3;
   }
@@ -258,6 +261,12 @@ const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
 
 asynchronousFunction(app_key, AddressKey, url_p2);
 asynchronousFunction2(app_key, IDKey, url_p5, Type);
+
+function hide_div(){
+  $(document).ready(function() {
+    $("#comps-div").hide();
+  });
+}
 
 function hide(){
   $(document).ready(function() {
