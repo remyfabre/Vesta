@@ -286,7 +286,7 @@ function getBrowserSize(){
 $(document).ready(function() {
   var substr = "criteria-"
   var list = ["Pièces", "Salles de bain", "Étages", "Chambres", "Parking"]
-  for (let i =0; i <= 7; i++) {
+  for (let i =0; i <= 4; i++) {
     if (Number($("#" + substr + (i+1).toString() +"-a").html()) > 1 ) {
       $("#" + substr + (i+1).toString() +"-b").html($(list).get(i));
     }
