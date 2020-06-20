@@ -163,7 +163,6 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     document.getElementById('cost-of-service-3').innerHTML = Math.round(costoffre*100).toString() + "%";
     document.getElementById('pourcentage-3').innerHTML = Math.round(costoffre*100).toString() + "%";
     document.getElementById('pourcentage-3-b').innerHTML =  parseFloat((costguarantee*100+1).toString()).toFixed(1).toString() + "%";
-    alert("I went there");
   }
 });
 
