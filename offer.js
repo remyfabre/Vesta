@@ -318,5 +318,8 @@ $(document).ready(function() {
     if (Number($("#" + substr + (i+1).toString() +"-a").html()) > 1 ) {
       $("#" + substr + (i+1).toString() +"-b").html($(list).get(i));
     }
+    if (Number($("#" + substr + (i+1).toString() +"-a").html()) === "" ) {
+      $("#map").hide();
+    }
   }
 });
