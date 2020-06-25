@@ -1,5 +1,7 @@
 document.getElementById("loading").addEventListener("load", redirect());
 
+var FloorsHouse = document.getElementById("FloorsHouse").innerHTML
+
 function redirect() {
   window.setTimeout(function() {
     hideLoader();
@@ -52,7 +54,7 @@ $(document).ready(function() {
   });
   $("#referral-1").click(function() {
     document.getElementById("referral-2").scrollIntoView({
-    behavior:"smooth", inline: "center", block: "center"
+      behavior:"smooth", inline: "center", block: "center"
     });
   });
   $(".id-calendy").on('click', function() {
@@ -60,6 +62,9 @@ $(document).ready(function() {
   });
   if(parseInt(getBrowserSize().width) > 991 && parseInt(getBrowserSize().width) < 1150){
     $("#map").hide();
+  }
+  if(FloorsHouse > 0){
+  	$("#criteria-3-a").html(FloorsHouse);
   }
 });
 
@@ -312,9 +317,6 @@ $(document).ready(function() {
   for (let i =0; i <= 4; i++) {
     if (Number($("#" + substr + (i+1).toString() +"-a").html()) > 1 ) {
       $("#" + substr + (i+1).toString() +"-b").html($(list).get(i));
-    }
-    if (Number($("#" + substr + (i+1).toString() +"-a").html()) == 0 ) {
-      $("#map").hide();
     }
   }
 });
