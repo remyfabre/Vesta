@@ -688,6 +688,8 @@ var dataName = [
   "bathroomcondition",
   "paintquality",
   "paintcondition",
+  "windowsquality",
+  "windowscondition",
   "situation",
   "sellingdate",
   "sellerproblem"
