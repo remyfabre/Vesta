@@ -654,6 +654,29 @@ $(document).ready(function() {
   });
 });
 
+$('#buttonslide8').prop('disabled', true);
+var buttonslide8 = document.getElementById("buttonslide8");
+buttonslide8.style.color = "#62636B";
+buttonslide8.style.backgroundColor = "#F8F6F4";
+buttonslide8.style.opacity = "0.5";
+
+$(document).ready(function() {
+  $("#formcontentslide8").click(function() {
+    var buttonslide8 = document.getElementById("buttonslide8");
+    if($("input[id='checkboxslide8']:checked").val()){
+      $('#buttonslide8').prop('disabled', false);
+      buttonslide8.style.color = "#FFFFFF";
+      buttonslide8.style.backgroundColor = "#1277E1";
+      buttonslide8.style.opacity = "1";
+    } else {
+      $('#buttonslide8').prop('disabled', true);
+      buttonslide8.style.color = "#62636B";
+      buttonslide8.style.backgroundColor = "#F8F6F4";
+      buttonslide8.style.opacity = "0.5";
+    }
+  });
+});
+
 $('.buttonslideradio').prop('disabled', true);
 $('.buttonslideradio').css({"background-color": "#F8F6F4", "color": "#62636B", "opacity": "0.5"});
 
