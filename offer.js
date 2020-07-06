@@ -66,6 +66,7 @@ $(document).ready(function() {
   if(FloorsHouse > 0){
   	$("#criteria-3-a").html(FloorsHouse);
   }
+  $("#comps-div").hide();
 });
 
 document.getElementById('type-comps').innerHTML = document.getElementById('Type').innerHTML + "s"
