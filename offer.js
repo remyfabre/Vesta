@@ -19,6 +19,7 @@ $(document).ready(function() {
   $(".id-1").click(function() {
     $("#vesta-guarantee").hide();
     $("#vesta-offer").hide();
+    $("#comps-div").hide();
     $("#home").show();
     window.scrollTo({
       top: 0,
