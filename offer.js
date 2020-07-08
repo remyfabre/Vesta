@@ -215,6 +215,7 @@ async function getToken(app_key, Key, url_p1, url_p2) {
 
 const asynchronousFunction = async (app_key, AddressKey, url_p2) => {
   const response = await getToken(app_key, AddressKey, url_p1, url_p2);
+  if(Object.keys(response['data']['records']).length == 0){hide_div_referral()}
   const response_url = await getToken(app_key, AddressKey, url_p3, url_p2);
   var ref_count = response['data']['records']['0']['fields']['Total_referred_count']
   var ranking = response['data']['records']['0']['fields']['Ranking']
@@ -271,6 +272,12 @@ asynchronousFunction2(app_key, IDKey, url_p5, Type);
 function hide_div(){
   $(document).ready(function() {
     $("#comps-div").hide();
+  });
+}
+
+function hide_div_referral(){
+  $(document).ready(function() {
+    $("#referral-2").hide();
   });
 }
 
