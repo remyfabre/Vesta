@@ -25,6 +25,14 @@ function ShowShield() {
   });
 }
 
+function ChangeButton() {
+  $(document).ready(function() {
+    $('.id-signature').css('background-color', '#2CC8A7');
+    $('#id_postload').html('Nous avons biens reçu votre demande'); 
+    $('#id_postload_2').html('Demande envoyée');
+  });
+}
+
 $(document).ready(function() {
   $(".id-1").click(function() {
     window.scrollTo({
@@ -39,8 +47,7 @@ $(document).ready(function() {
     document.getElementById('email').value = document.getElementById('E-mailNew').innerHTML
     document.getElementById('phone').value = document.getElementById('TéléphoneNew').innerHTML
     document.getElementById("submit").click();
-    document.querySelector('.id-signature').style.backgroundColor = '#2CC8A7';
-    document.querySelector('.id_signature-postload').innerHTML = "Nous avons biens reçu votre demande"
+    ChangeButton();
   });
 });
 var valuation = Number(document.getElementById('value-new').innerHTML.replace(/€| /g, ""));
@@ -56,8 +63,7 @@ var myCookie = getCookie('already_signed');
 if (myCookie == null) {
   document.cookie = 'already_signed' + "=" + 'waiting to sign' + 30 + "; path=/";
 } else {
-  document.querySelector('.id-signature').style.backgroundColor = '#2CC8A7';
-  document.querySelector('.id_signature-postload').innerHTML = "Nous avons biens reçu votre demande"
+	ChangeButton();
 }
 
 function getCookie(name) {
