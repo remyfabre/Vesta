@@ -117,21 +117,21 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
   } else if (value > 160 && value <= 400) {
     var costguarantee = 0.045;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
-    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString() + "%";
     document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString() + "%";
     document.getElementById('slider-range-value-11').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString() + "%";
   } else if (value > 400 && value <= 600) {
     var costguarantee = 0.04;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
-    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString() + "%";
     document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString() + "%";
     document.getElementById('slider-range-value-11').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString() + "%";
   } else {
     var costguarantee = 0.035;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
-    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString() + "%";
     document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString() + "%";
     document.getElementById('slider-range-value-11').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString() + "%";
