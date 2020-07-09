@@ -27,7 +27,6 @@ var listing_price = Math.round(valuation * 1.03 / 1000);
 var max = Math.round(listing_price * 1.2);
 var min = Math.round(listing_price * 0.80);
 var rangeSlider = document.getElementById('slider');
-alert(rangeSlider);
 
 // implement html modifications
 document.getElementById('value').innerHTML = listing_price.toString() + " 000 €";
@@ -59,21 +58,29 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
   if (value <= 175) {
     var costguarantee = 8;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
+    var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-2').innerHTML = (value - costguarantee).toString() + " 000 €";
     document.getElementById('cost-of-service').innerHTML = costguarantee.toString() + " 000 €";
+    document.getElementById('value-proposition-1-2').innerHTML = txt;
   } else if (value > 160 && value <= 400) {
     var costguarantee = 0.045;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
+    document.getElementById('pourcentage-2-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    document.getElementById('pourcentage-3-b').innerHTML =  (costguarantee*100+1).toString() + "%";
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString() + "%";
   } else if (value > 400 && value <= 600) {
     var costguarantee = 0.04;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
+    document.getElementById('pourcentage-2-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    document.getElementById('pourcentage-3-b').innerHTML =  (costguarantee*100+1).toString() + "%";
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString() + "%";
   } else {
     var costguarantee = 0.035;
     var guaranteed_sale_price = Math.round(valuation*0.95 / 1000) - costguarantee;
+    document.getElementById('pourcentage-2-b').innerHTML =  (costguarantee*100+1).toString() + "%";
+    document.getElementById('pourcentage-3-b').innerHTML =  (costguarantee*100+1).toString() + "%";
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString() + "%";
   }
@@ -91,6 +98,5 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     var net_vendeur_txt = document.getElementById('net-vendeur-txt')
     net_vendeur_txt.style.color = '#000000';
     net_vendeur_txt.innerHTML = "Net vendeur estimé"
-  
   }
 });
