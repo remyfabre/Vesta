@@ -47,7 +47,7 @@ var valuation = Number(document.getElementById('value-new').innerHTML.replace(/�
 var listing_price = Math.round(valuation * 1.03 / 1000);
 var max = Math.round(listing_price * 1.2);
 var min = Math.round(listing_price * 0.80);
-var rangeSlider = document.getElementById('slider-10');
+var rangeSlider4 = document.getElementById('slider-10');
 
 // implement html modifications
 document.getElementById('value-new').innerHTML = listing_price.toString() + " 000 €";
@@ -77,7 +77,7 @@ function getCookie(name) {
   return unescape(cookie.substring(begin + prefix.length, end));
 } 
 
-noUiSlider.create(rangeSlider, {
+noUiSlider.create(rangeSlider4, {
   start: [listing_price],
   step: 1000 / 1000,
   connect: 'lower',
@@ -97,7 +97,7 @@ noUiSlider.create(rangeSlider, {
   }
 });
 
-rangeSlider.noUiSlider.on('update', function(values, handle) {
+rangeSlider4.noUiSlider.on('update', function(values, handle) {
   var value = Math.round(values[handle]);
   var guaranteed_sale_price = 0;
   document.getElementById('slider-range-value-10').innerHTML = value.toString() + " 000 €";
