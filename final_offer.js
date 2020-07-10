@@ -28,8 +28,9 @@ function ShowShield() {
 function ChangeButton() {
   $(document).ready(function() {
     $('.id-signature').css('background-color', '#2CC8A7');
-    $('#id_postload').html('Nous avons biens reçu votre demande'); 
+    $('#id_postload').html('Nous avons biens reçu votre demande');
     $('#id_postload_2').html('Demande envoyée');
+    $('.id-signature').css('box-shadow', 'none');
   });
 }
 
@@ -60,6 +61,7 @@ var rangeSlider4 = document.getElementById('slider-10');
 document.getElementById('value-new').innerHTML = listing_price.toString() + " 000 €";
 
 var myCookie = getCookie('already_signed');
+
 if (myCookie == null) {
   document.cookie = 'already_signed' + "=" + 'waiting to sign' + 30 + "; path=/";
 } else {
