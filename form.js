@@ -414,12 +414,14 @@ buttonslide5.style.color = "#62636b";
 buttonslide5.style.backgroundColor = "#f8f6f4";
 buttonslide5.style.opacity = "0.5";
 
+var count = 0;
+
 $('#up33').click(function() {
 	var valup33 = parseInt($('#housefloorscnt').val(), 10);
-	if (valup33) {
+  if (valup33) {
 		$('#housefloorscnt').val(Math.min(valup33 + 1, 10));
 	} else {
-		$('#housefloorscnt').val(1, 10);
+		$('#housefloorscnt').val(2, 10);
 	}
 });
 
@@ -438,7 +440,7 @@ $("#housefloorscnt").keydown(function (e) {
 $('#down33').click(function() {
   var valdown33 = parseInt($('#housefloorscnt').val(), 10);
   if (valdown33) {
- 		if(parseInt($('#housefloorscnt').val(), 10) == '1') {
+ 		if(parseInt($('#housefloorscnt').val(), 10) == '2') {
       $('#housefloorscnt').val("Plain-pied");
     } else {
     	$('#housefloorscnt').val(Math.max(valdown33 - 1, 0));
