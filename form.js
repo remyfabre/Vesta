@@ -140,8 +140,7 @@ buttonslide3.style.opacity = "0.5";
 var bool1 = false,
 	bool2 = false,
 	bool3 = false,
-	bool4 = false,
-	bool5 = false;
+	bool4 = false;
 
 $(document).ready(function() {
 	$("#housesizesqft").keyup(function() {
@@ -223,34 +222,13 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$("#livingareasizesqft").keyup(function() {
-		if ($("#livingareasizesqft").val() <= 1000 && $("#livingareasizesqft").val() >= 1) {
-			document.getElementById("divlivingareasizesqft").style.borderColor = "#f8f6f4";
-			document.getElementById("error1livingareasizesqft").style.display = 'none';
-			document.getElementById("error2livingareasizesqft").style.display = 'none';
-			bool5 = true;
-		} else if (!$("#livingareasizesqft").val()) {
-			document.getElementById("divlivingareasizesqft").style.borderColor = "#ed6a5e";
-			document.getElementById("error1livingareasizesqft").style.display = 'none';
-			document.getElementById("error2livingareasizesqft").style.display = 'block';
-			bool5 = false;
-		} else {
-			document.getElementById("divlivingareasizesqft").style.borderColor = "#ed6a5e";
-			document.getElementById("error2livingareasizesqft").style.display = 'none';
-			document.getElementById("error1livingareasizesqft").style.display = 'block';
-			bool5 = false;
-		}
-	});
-});
-
-$(document).ready(function() {
 	$("#formcontentslide3").keyup(function() {
-		if (bool1 == true && bool2 == true && bool3 == true && bool5 == true) {
+		if (bool1 == true && bool2 == true && bool3 == true) {
 			$('#buttonslide3').prop('disabled', false);
 			buttonslide3.style.color = "#ffffff";
 			buttonslide3.style.backgroundColor = "#1277e1";
 			buttonslide3.style.opacity = "1";
-		} else if (bool4 == true && bool5 == true) {
+		} else if (bool4 == true) {
 			$('#buttonslide3').prop('disabled', false);
 			buttonslide3.style.color = "#ffffff";
 			buttonslide3.style.backgroundColor = "#1277e1";
