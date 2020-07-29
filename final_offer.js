@@ -68,13 +68,13 @@ $(document).ready(function() {
     ChangeButton();
   });
   $(".id-new-offer").on('click', function() {
-    document.getElementById('name').value = document.getElementById('Nom completNew').innerHTML
-    document.getElementById('address').value = document.getElementById('AddressKeyNew').innerHTML
-    document.getElementById('recordid').value = document.getElementById('Record_IDNew').innerHTML
-    document.getElementById('email').value = document.getElementById('E-mailNew').innerHTML
-    document.getElementById('phone').value = document.getElementById('TéléphoneNew').innerHTML
-    document.getElementById('ask-type').value = 'Asked a new offer'
-    document.getElementById("submit").click();
+    document.getElementById('name-2').value = document.getElementById('Nom completNew').innerHTML
+    document.getElementById('address-2').value = document.getElementById('AddressKeyNew').innerHTML
+    document.getElementById('recordid-2').value = document.getElementById('Record_IDNew').innerHTML
+    document.getElementById('email-2').value = document.getElementById('E-mailNew').innerHTML
+    document.getElementById('phone-2').value = document.getElementById('TéléphoneNew').innerHTML
+    document.getElementById('ask-type-2').value = 'Asked a new offer'
+    document.getElementById("submit-2").click();
   });
 });
 
