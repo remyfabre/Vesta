@@ -1,4 +1,9 @@
 document.getElementById("loading").addEventListener("load", redirect());
+
+if (navigator.userAgent.match(/Mobile/)) {
+  document.getElementById('traditionnelle').value = 'Tradition';
+}
+
 function redirect() {
   window.setTimeout(function() {
     hideLoader();
@@ -20,6 +25,7 @@ function ShowShield() {
     $('#shield').show(250);
   });
 }
+
 function ChangeButton() {
   $(document).ready(function() {
     $('.id-signature').css('background-color', '#2CC8A7');
@@ -28,6 +34,7 @@ function ChangeButton() {
     $('.id-signature').css('box-shadow', 'none');
   });
 }
+
 $(document).ready(function() {
   $(".id-1").click(function() {
     window.scrollTo({
@@ -45,6 +52,7 @@ $(document).ready(function() {
     ChangeButton();
   });
 });
+
 var valuation = Number(document.getElementById('value-new').innerHTML.replace(/€| /g, ""));
 var est_final_sale_price = Math.round(valuation/1000);
 var max = Math.round(est_final_sale_price * 1.2);
@@ -53,11 +61,13 @@ var rangeSlider4 = document.getElementById('slider-10');
 // implement html modifications
 document.getElementById('value-new').innerHTML = est_final_sale_price.toString() + " 000 €";
 var myCookie = getCookie('already_signed');
+
 if (myCookie == null) {
   document.cookie = 'already_signed' + "=" + 'waiting to sign' + 30 + "; path=/";
 } else {
 	ChangeButton();
 }
+
 function getCookie(name) {
   var cookie = document.cookie;
   var prefix = name + "=";
@@ -73,7 +83,8 @@ function getCookie(name) {
     }
   }
   return unescape(cookie.substring(begin + prefix.length, end));
-} 
+}
+
 noUiSlider.create(rangeSlider4, {
   start: [est_final_sale_price],
   step: 1000 / 1000,
@@ -93,6 +104,7 @@ noUiSlider.create(rangeSlider4, {
     })
   }
 });
+
 rangeSlider4.noUiSlider.on('update', function(values, handle) {
   var fixed_value = valuation / 1000;
   var value = Math.round(values[handle]);
@@ -101,7 +113,8 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
   if (est_final_sale_price <= 175) {
     var costguarantee = 8;
     var guaranteed_sale_price = fixed_value * 0.95;
-    var costofservice = fixed_value - costguarantee;
+    var costofservice = costguarantee;
+    alert(costofservice);
     var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costguarantee);
     var floating_net_proceed = value - costguarantee;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
@@ -173,6 +186,7 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     net_vendeur_txt.innerHTML = "Net vendeur estimé"
   }
 });
+
 function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed) {
   $(document).ready(function() {
    	// Replace HTML content with final sale price
@@ -188,13 +202,17 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
     fees_vesta = Math.round(costofservice);
     $('#fees_vesta').html((fees_vesta).toString() + " 000 €");
     // Replace HTML content with fees_traditional
-    fees_traditional = Math.round((costguarantee + 0.01) * price_on_market);
+    if (costguarantee < 1) {
+    	fees_traditional = Math.round((costguarantee + 0.01) * price_on_market);
+    } else {
+    	fees_traditional = 12;
+    }
     $('#fees_traditional').html((fees_traditional).toString() + " 000 €");
     // Replace HTML content with min_net_proceed_vesta
     min_net_proceed_vesta = guaranteed_net_proceed
     $('#min_net_proceed_vesta').html((min_net_proceed_vesta).toString() + " 000 €");
     // Replace HTML content with net_proceed_vesta
-    net_proceed_vesta = Math.round(value - (value * costguarantee));
+    net_proceed_vesta = Math.round(final_sale_price - fees_vesta);
     $('#net_proceed_vesta').html((net_proceed_vesta).toString() + " 000 €");
     // Replace HTML content with net_proceed
     net_proceed = value - fees_traditional;
