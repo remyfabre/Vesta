@@ -4,22 +4,37 @@ if (navigator.userAgent.match(/Mobile/)) {
   document.getElementById('traditionnelle').innerHTML = 'Tradition';
 }
 
+$(document).ready(function() {
+  const date = new Date($('#date').html());
+  const today = new Date();
+  const expiring_date = new Date(moment(date).add(7, 'days'));
+  let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+  $('.date').html(expiring_date.toLocaleString('fr-FR', options));
+  if (today > expiring_date) {
+    $('.new-slider-1').hide()
+    $('.section-redirect').show()
+  }
+});
+
 function redirect() {
   window.setTimeout(function() {
     hideLoader();
   }, 3000);
 }
+
 function hideLoader() {
   $(document).ready(function() {
     $('#loading').fadeOut();
     $('#loader').fadeOut();
   });
 }
+
 function hideShield() {
   $(document).ready(function() {
     $('#shield').hide(250);
   });
 }
+
 function ShowShield() {
   $(document).ready(function() {
     $('#shield').show(250);
@@ -48,8 +63,18 @@ $(document).ready(function() {
     document.getElementById('recordid').value = document.getElementById('Record_IDNew').innerHTML
     document.getElementById('email').value = document.getElementById('E-mailNew').innerHTML
     document.getElementById('phone').value = document.getElementById('TéléphoneNew').innerHTML
+    document.getElementById('ask-type').value = 'Asked to sign contracts'
     document.getElementById("submit").click();
     ChangeButton();
+  });
+  $(".id-new-offer").on('click', function() {
+    document.getElementById('name').value = document.getElementById('Nom completNew').innerHTML
+    document.getElementById('address').value = document.getElementById('AddressKeyNew').innerHTML
+    document.getElementById('recordid').value = document.getElementById('Record_IDNew').innerHTML
+    document.getElementById('email').value = document.getElementById('E-mailNew').innerHTML
+    document.getElementById('phone').value = document.getElementById('TéléphoneNew').innerHTML
+    document.getElementById('ask-type').value = 'Asked a new offer'
+    document.getElementById("submit").click();
   });
 });
 
