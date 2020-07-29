@@ -1,7 +1,7 @@
 document.getElementById("loading").addEventListener("load", redirect());
 
 if (navigator.userAgent.match(/Mobile/)) {
-  document.getElementById('traditionnelle').value = 'Tradition';
+  document.getElementById('traditionnelle').innerHTML = 'Tradition';
 }
 
 function redirect() {
