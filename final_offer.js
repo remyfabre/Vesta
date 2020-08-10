@@ -83,6 +83,7 @@ var est_final_sale_price = Math.round(valuation/1000);
 var max = Math.round(est_final_sale_price * 1.2);
 var min = Math.round(est_final_sale_price * 0.80);
 var rangeSlider4 = document.getElementById('slider-10');
+var new_count = 0;
 // implement html modifications
 document.getElementById('value-new').innerHTML = est_final_sale_price.toString() + " 000 €";
 var myCookie = getCookie('already_signed');
@@ -139,7 +140,7 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costguarantee = 8;
     var guaranteed_sale_price = fixed_value * 0.95;
     var costofservice = costguarantee;
-    var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costguarantee);
+    var guaranteed_net_proceed = guaranteed_sale_price - costguarantee;
     var floating_net_proceed = value - costguarantee;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-11').innerHTML = (value - costguarantee).toString() + " 000 €";
@@ -150,7 +151,8 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costguarantee = 0.045;
     var guaranteed_sale_price = fixed_value * 0.95;
     var costofservice = fixed_value * costguarantee;
-    var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costofservice);
+    var guaranteed_net_proceed = guaranteed_sale_price - costofservice;
+    alert(guaranteed_net_proceed);
     var floating_net_proceed = value - costofservice;
     document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString().replace('.',',') + "%";
     document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString().replace('.',',') + "%";
@@ -192,12 +194,21 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     if (value <= 175) {
       var costguarantee =  Math.round((value - guaranteed_net_proceed));
       document.getElementById('cost-of-service-10').innerHTML = costguarantee.toString() + " 000 €";
-      if (costguarantee <= 0) {document.getElementById('cost-of-service-10').innerHTML = "Offert"}
+      if (costguarantee <= 0) {document.getElementById('cost-of-service-10').innerHTML = "Offert"};
     } else {
+    	var pre_costguarantee = costguarantee
       var costguarantee =  Math.floor((value - guaranteed_net_proceed) / value * 1000) / 1000;
-      document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee * 100).toString()).toFixed(1).toString() + "%";
-      if (costguarantee <= 0) {document.getElementById('cost-of-service-10').innerHTML = "Offert"}
+      let list = []
+      if (costguarantee <= 0) {
+      	document.getElementById('cost-of-service-10').innerHTML = "Offert";
+      } else if (costguarantee >= pre_costguarantee) {
+      	document.getElementById('cost-of-service-10').innerHTML = parseFloat((pre_costguarantee*100).toString()).toFixed(1).toString().replace('.',',') + "%";
+      } else {
+      	document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString().replace('.',',') + "%";
+      }
     }
+    alert("I went there");
+    SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed);
   }
   else {
     document.getElementById('slider-range-value-11').style.color = '#1277e1';
@@ -213,33 +224,36 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
 
 function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed) {
   $(document).ready(function() {
-   	// Replace HTML content with final sale price
-    final_sale_price = value
-    $('.final_sale_price').html((final_sale_price).toString() + " 000 €");
-    // Replace HTML content with seller_concession
-    seller_concession = Math.round(final_sale_price * 0.035)
-    $('.seller_concession').html((seller_concession).toString() + " 000 €");
-    // Replace HTML content with price_on_market
-    price_on_market = final_sale_price + seller_concession
-    $('.price_on_market').html((price_on_market).toString() + " 000 €");
-    // Replace HTML content with fees_vesta
-    fees_vesta = Math.round(costofservice);
-    $('#fees_vesta').html((fees_vesta).toString() + " 000 €");
-    // Replace HTML content with fees_traditional
-    if (costguarantee < 1) {
-    	fees_traditional = Math.round((costguarantee + 0.01) * price_on_market);
-    } else {
-    	fees_traditional = 12;
+    new_count += 1
+    if (new_count == 1){
+      // Replace HTML content with final sale price
+      final_sale_price = value
+      $('.final_sale_price').html((final_sale_price).toString() + " 000 €");
+      // Replace HTML content with seller_concession
+      seller_concession = Math.round(final_sale_price * 0.035)
+      $('.seller_concession').html((seller_concession).toString() + " 000 €");
+      // Replace HTML content with price_on_market
+      price_on_market = final_sale_price + seller_concession
+      $('.price_on_market').html((price_on_market).toString() + " 000 €");
+      // Replace HTML content with fees_vesta
+      var fees_vesta = Math.round(costofservice);
+      $('#fees_vesta').html((fees_vesta).toString() + " 000 €");
+      // Replace HTML content with fees_traditional
+      if (costguarantee < 1) {
+        fees_traditional = Math.round((costguarantee + 0.01) * price_on_market);
+      } else {
+        fees_traditional = 12;
+      }
+      $('#fees_traditional').html((fees_traditional).toString() + " 000 €");
+      // Replace HTML content with min_net_proceed_vesta
+      min_net_proceed_vesta = guaranteed_net_proceed
+      $('#min_net_proceed_vesta').html((min_net_proceed_vesta).toString() + " 000 €");
+      // Replace HTML content with net_proceed_vesta
+      net_proceed_vesta = Math.round(final_sale_price - fees_vesta);
+      $('#net_proceed_vesta').html((net_proceed_vesta).toString() + " 000 €");
+      // Replace HTML content with net_proceed
+      net_proceed = value - fees_traditional;
+      $('#net_proceed').html((net_proceed).toString() + " 000 €");
     }
-    $('#fees_traditional').html((fees_traditional).toString() + " 000 €");
-    // Replace HTML content with min_net_proceed_vesta
-    min_net_proceed_vesta = guaranteed_net_proceed
-    $('#min_net_proceed_vesta').html((min_net_proceed_vesta).toString() + " 000 €");
-    // Replace HTML content with net_proceed_vesta
-    net_proceed_vesta = Math.round(final_sale_price - fees_vesta);
-    $('#net_proceed_vesta').html((net_proceed_vesta).toString() + " 000 €");
-    // Replace HTML content with net_proceed
-    net_proceed = value - fees_traditional;
-    $('#net_proceed').html((net_proceed).toString() + " 000 €");
   });
 }
