@@ -207,7 +207,6 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
       	document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString().replace('.',',') + "%";
       }
     }
-    alert("I went there");
     SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed);
   }
   else {
