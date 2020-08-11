@@ -140,7 +140,7 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costguarantee = 8;
     var guaranteed_sale_price = fixed_value * 0.95;
     var costofservice = costguarantee;
-    var guaranteed_net_proceed = guaranteed_sale_price - costguarantee;
+    var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costguarantee);
     var floating_net_proceed = value - costguarantee;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-11').innerHTML = (value - costguarantee).toString() + " 000 €";
@@ -151,7 +151,7 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costguarantee = 0.045;
     var guaranteed_sale_price = fixed_value * 0.95;
     var costofservice = fixed_value * costguarantee;
-    var guaranteed_net_proceed = guaranteed_sale_price - costofservice;
+    var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costofservice);
     alert(guaranteed_net_proceed);
     var floating_net_proceed = value - costofservice;
     document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString().replace('.',',') + "%";
