@@ -45,6 +45,8 @@ $(document).ready(function() {
       behavior: 'smooth'
     });
   });
+  
+  
   $(".id-4").click(function() {
     $("#home").hide();
     $("#vesta-guarantee").hide();
@@ -127,7 +129,7 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
   document.getElementById('slider-range-value').innerHTML = value.toString() + " 000 €";
   if (value <= 130) {
     var costguarantee = 12;
-    var costoffre = costguarantee;
+    var costoffre = 14;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-2').innerHTML = (value - costguarantee).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = costguarantee.toString().replace('.',',') + " 000 €";
@@ -136,7 +138,7 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     document.getElementById('value-proposition-1-2').innerHTML = txt;
   } else if (value > 130 && value <= 140) {
     var costguarantee = 13;
-    var costoffre = costguarantee;
+    var costoffre = 15;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-2').innerHTML = (value - costguarantee).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = costguarantee.toString().replace('.',',') + " 000 €";
@@ -145,7 +147,7 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     document.getElementById('value-proposition-1-2').innerHTML = txt;
   } else if (value > 140 && value <= 175) {
     var costguarantee = 14;
-    var costoffre = costguarantee;
+    var costoffre = 16;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-2').innerHTML = (value - costguarantee).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = costguarantee.toString().replace('.',',') + " 000 €";
@@ -154,25 +156,25 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     document.getElementById('value-proposition-1-2').innerHTML = txt;
   } else if (value > 175 && value <= 400) {
     var costguarantee = 0.08;
-    var costoffre = costguarantee;
+    var costoffre = 0.095;
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costoffre*100).toString().replace('.',',') + "%";
   } else if (value > 400 && value <= 600) {
     var costguarantee = 0.075;
-    var costoffre = costguarantee;
+    var costoffre = 0.09;
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costoffre*100).toString().replace('.',',') + "%";
   } else {
     var costguarantee = 0.07;
-    var costoffre = costguarantee;
+    var costoffre = 0.085;
     document.getElementById('slider-range-value-2').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-2').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(0).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
-    document.getElementById('cost-of-service-3').innerHTML = Math.round(costoffre*100).toString().replace('.',',') + "%";
+    document.getElementById('cost-of-service-3').innerHTML = parseFloat((costoffre*100).toString()).toFixed(1).replace('.',',') + "%";
   }
 });
 
