@@ -14,6 +14,18 @@ $(document).ready(function() {
   }
 });
 
+$(document).ready(function() {
+  $(".id-new-offer").on('click', function() {
+    document.getElementById('name-2').value = document.getElementById('Nom completNew').innerHTML
+    document.getElementById('address-2').value = document.getElementById('AddressKeyNew').innerHTML
+    document.getElementById('recordid-2').value = document.getElementById('Record_IDNew').innerHTML
+    document.getElementById('email-2').value = document.getElementById('E-mailNew').innerHTML
+    document.getElementById('phone-2').value = document.getElementById('TéléphoneNew').innerHTML
+    document.getElementById('ask-type-2').value = 'Asked a new offer'
+    document.getElementById("submit-2").click();
+  });
+});
+
 var FloorsHouse = document.getElementById("FloorsHouse").innerHTML
 
 function redirect() {
