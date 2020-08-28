@@ -140,7 +140,7 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costguarantee = 8;
     var guaranteed_sale_price = fixed_value * 0.95;
     var costofservice = costguarantee;
-    var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costguarantee);
+    var guaranteed_net_proceed = guaranteed_sale_price - costguarantee;
     var floating_net_proceed = value - costguarantee;
     var txt = "Payez moins que les frais traditionnels et gardez plus d'argent dans votre poche."
     document.getElementById('slider-range-value-11').innerHTML = (value - costguarantee).toString() + " 000 €";
@@ -151,11 +151,8 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costguarantee = 0.045;
     var guaranteed_sale_price = fixed_value * 0.95;
     var costofservice = fixed_value * costguarantee;
-    var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costofservice);
-    alert(guaranteed_net_proceed);
+    var guaranteed_net_proceed = guaranteed_sale_price - costofservice;
     var floating_net_proceed = value - costofservice;
-    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString().replace('.',',') + "%";
-    document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-11').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString().replace('.',',') + "%";
     SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed);
@@ -165,8 +162,6 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costofservice = fixed_value * costguarantee;
     var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costofservice);
     var floating_net_proceed = value - costofservice;
-    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString().replace('.',',') + "%";
-    document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-11').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString().replace('.',',') + "%";
     SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed);
@@ -176,8 +171,6 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     var costofservice = fixed_value * costguarantee;
     var guaranteed_net_proceed = Math.round(guaranteed_sale_price - costofservice);
     var floating_net_proceed = value - costofservice;
-    document.getElementById('pourcentage-10-b').innerHTML =  (costguarantee*100).toString().replace('.',',') + "%";
-    document.getElementById('pourcentage-10-c').innerHTML =  (costguarantee*100+1).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-11').innerHTML = Math.round((value - (value * costguarantee))).toString() + " 000 €";
     document.getElementById('cost-of-service-10').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(1).toString().replace('.',',') + "%";
     SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed);
