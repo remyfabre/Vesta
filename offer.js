@@ -8,6 +8,7 @@ $(document).ready(function() {
   $('.date').html(expiring_date.toLocaleString('fr-FR', options));
   if (today > expiring_date) {
     $("#home").hide();
+    $("#section-redirect").show();
   } else {
   	$("#navbar_menu_icon").show();
   }
