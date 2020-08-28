@@ -1,5 +1,18 @@
 document.getElementById("loading").addEventListener("load", redirect());
 
+$(document).ready(function() {
+  const date = new Date($('#date').html());
+  const today = new Date();
+  const expiring_date = new Date(moment(date).add(7, 'days'));
+  let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+  $('.date').html(expiring_date.toLocaleString('fr-FR', options));
+  if (today > expiring_date) {
+    $("#home").hide();
+  } else {
+  	$("#navbar_menu_icon").show();
+  }
+});
+
 var FloorsHouse = document.getElementById("FloorsHouse").innerHTML
 
 function redirect() {
@@ -343,17 +356,5 @@ $(document).ready(function() {
     if ($("#" + substr + (i+1).toString() +"-a").html() === "") {
       $("#map").hide();
     }
-  }
-});
-
-$(document).ready(function() {
-  const date = new Date($('#date').html());
-  const today = new Date();
-  const expiring_date = new Date(moment(date).add(7, 'days'));
-  let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-  $('.date').html(expiring_date.toLocaleString('fr-FR', options));
-  if (today > expiring_date) {
-    $('.new-slider-1').hide()
-    $('.section-redirect').show()
   }
 });
