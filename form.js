@@ -66,7 +66,7 @@ var postal_code = HomeAddress[2];
 $(document).ready(function() {
   if (postal_code.substring(0, 2) == "34") {
    	$("#flowbaseSlider").hide();
-    $(".wrap-1").hide();
+    $("#wrap-1").hide();
     $("#flowbaseSlider_2").show();
   }
 });
