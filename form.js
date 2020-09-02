@@ -64,7 +64,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 var postal_code = HomeAddress[2];
 
 $(document).ready(function() {
-  if (postal_code.substring(0, 2) == "59") {
+  if (postal_code.substring(0, 2) == "34") {
    	$("#flowbaseSlider").hide();
     $("#flowbaseSlider_2").show();
   }
