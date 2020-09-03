@@ -61,10 +61,10 @@ for (var i = 0; i < cookieArr.length; i++) {
 	}
 }
 
-var postal_code = HomeAddress[2];
+var region = HomeAddress[2].substring(0, 2)
 
 $(document).ready(function() {
-  if (postal_code.substring(0, 2) == "34") {
+  if ((region !== "59")) {
 	$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible')
   }
 });
