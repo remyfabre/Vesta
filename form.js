@@ -65,16 +65,13 @@ var postal_code = HomeAddress[2];
 
 $(document).ready(function() {
   if (postal_code.substring(0, 2) == "34") {
-   	$("#flowbaseSlider_1").hide();
-    $("#flowbaseSlider_2").show();
+	$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible')
   }
 });
 
 document.getElementById("Home Address 1").innerHTML = (HomeAddress[0] + ' ' + HomeAddress[1]);
 document.getElementById("Home Address 2").innerHTML = (HomeAddress[2] + ' ' + HomeAddress[3]);
 document.getElementById("Home Address 3").innerHTML = (HomeAddress[5]);
-
-document.getElementById("Home Address 1_2").innerHTML = (HomeAddress[0] + ' ' + HomeAddress[1] + ', ' + HomeAddress[2] + ' ' + HomeAddress[3]);
 
 
 // Get each component of the address from the place details,
