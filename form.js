@@ -61,8 +61,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 	}
 }
 
-//var region = HomeAddress[2].substring(0, 2)
-var region = "59320".substring(0, 2)
+var region = HomeAddress[2].substring(0, 2)
 
 $(document).ready(function() {
   if ((region !== "59")) {
