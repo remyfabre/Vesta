@@ -291,6 +291,7 @@ const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
     var size = 3;
   }
   
+
   for (let x = 0; x <= size; x++) {
     document.getElementById('image-' + x).src = response_comps['data']['records'][x]['fields']['Pictures'][0]['url'];
     var title = Type + " à " + response_comps['data']['records'][x]['fields']['Ville'];
@@ -298,7 +299,8 @@ const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
     if (title.length != 0) {resize()}
     var prix_de_vente = response_comps['data']['records'][x]['fields']['Prix_de_vente'];
     document.getElementById('pricing-' + x).innerHTML = Math.round(prix_de_vente / 1000).toString() + " 000 €";
-    document.getElementById('sqm-' + x).innerHTML = response_comps['data']['records'][x]['fields']['Surface_habitable'];
+    var sqm = response_comps['data']['records'][x]['fields']['Surface_habitable'] 
+    document.getElementById('sqm-' + x).innerHTML = sqm.substring(0, sqm.length - 2) + " m²";
     document.getElementById('roomcnt-' + x).innerHTML = response_comps['data']['records'][x]['fields']['Nb_pieces'].replace("p", "");
     document.getElementById('bedroomcnt-' + x).innerHTML = response_comps['data']['records'][x]['fields']['Nb_chambres'].replace("ch", "");
   }
