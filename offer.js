@@ -3,7 +3,7 @@ document.getElementById("loading").addEventListener("load", redirect());
 $(document).ready(function() {
   const date = new Date($('#date').html());
   const today = new Date();
-  const expiring_date = new Date(moment(date).add(7, 'days'));
+  const expiring_date = new Date(moment(date).add(8, 'days'));
   let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
   $('.date').html(expiring_date.toLocaleString('fr-FR', options));
   if (today > expiring_date) {
