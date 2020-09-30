@@ -79,7 +79,7 @@ $(document).ready(function() {
 });
 
 var valuation = Number(document.getElementById('value-new').innerHTML.replace(/€| /g, ""));
-var moving_date = "28 Janvier 2020"
+var moving_date = document.getElementById('MovingDate').innerHTML
 var est_final_sale_price = Math.round(valuation/1000);
 var max = Math.round(est_final_sale_price * 1.2);
 var min = Math.round(est_final_sale_price * 0.80);
