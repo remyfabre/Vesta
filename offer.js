@@ -200,7 +200,7 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costagent*100).toString().replace('.',',') + "%";
-    document.getElementById('margin-of-negotiation-3').innerHTML = (costmargeofnegotiation*100).toString().replace('.',',') + "%";
+    document.getElementById('margin-of-negotiation-3').innerHTML = (Math.round(costmargeofnegotiation*1000)/10).toString().replace('.',',') + "%";
   } else if (value > 400 && value <= 600) {
     var costguarantee = 0.075;
     var costagent = 0.05;
@@ -210,7 +210,7 @@ rangeSlider.noUiSlider.on('update', function(values, handle) {
     document.getElementById('cost-of-service-2').innerHTML = (costguarantee*100).toString().replace('.',',') + "%";
     document.getElementById('slider-range-value-3').innerHTML = Math.round((value - (value * costoffre))).toString() + " 000 €";
     document.getElementById('cost-of-service-3').innerHTML = (costagent*100).toString().replace('.',',') + "%";
-    document.getElementById('margin-of-negotiation-3').innerHTML = (costmargeofnegotiation*100).toString().replace('.',',') + "%";
+    document.getElementById('margin-of-negotiation-3').innerHTML = (Math.round(costmargeofnegotiation*1000)/10).toString().replace('.',',') + "%";
   } else {
     var costguarantee = 0.07;
     var costagent = 0.05;
