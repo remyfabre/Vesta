@@ -1,5 +1,30 @@
 document.getElementById("loading").addEventListener("load", redirect());
 
+var app_key = 'keyaq6UJ8xDxMHQjG'
+var AddressKey = document.getElementById('AddressKey').innerHTML
+var IDKey = document.getElementById('Record_ID').innerHTML
+var Type = document.getElementById('Type').innerHTML
+var url_p1 = 'https://api.airtable.com/v0/appSMeiYtMiilbvhW/Referrals'
+var url_p2 = '?filterByFormula=AddressKey="'
+var url_p3 = 'https://api.airtable.com/v0/appSMeiYtMiilbvhW/CustomerBase 2'
+var url_p4 = 'https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/VentesComparables'
+var url_p5 = '?filterByFormula=Ref_ID="'
+var url_p6 = 'https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/Estimation'
+var url_p7 = '?filterByFormula=Adresse="'
+
+const asynchronousFunction3 = async (app_key, AddressKey, url_p6, url_p7) => {
+  const response = await getToken(app_key, AddressKey, url_p6, url_p7);
+  for (const key of Object.keys(response['data']['records'])) {
+    if(JSON.stringify(response['data']['records'][key]['fields']['Stage']) === '"Offre finale"') {
+    	var RecordID_redirect = response['data']['records'][key]['fields']['Record ID']
+      var url_redirect = "https://www.wevesta.com/offre-finale-vesta/" + RecordID_redirect
+      window.location.replace(url_redirect);
+    }
+  }
+}
+
+asynchronousFunction3(app_key, AddressKey, url_p6, url_p7);
+
 $(document).ready(function() {
   const date = new Date($('#date').html());
   const today = new Date();
@@ -253,16 +278,6 @@ rangeSlider2.noUiSlider.on('update', function(values, handle) {
     document.getElementById('cost-of-service-5').innerHTML = parseFloat((costguarantee*100).toString()).toFixed(0).toString().replace('.',',') + "%";
   }
 });
-
-var app_key = 'keyaq6UJ8xDxMHQjG'
-var AddressKey = document.getElementById('AddressKey').innerHTML
-var IDKey = document.getElementById('Record_ID').innerHTML
-var Type = document.getElementById('Type').innerHTML
-var url_p1 = 'https://api.airtable.com/v0/appSMeiYtMiilbvhW/Referrals'
-var url_p2 = '?filterByFormula=AddressKey="'
-var url_p3 = 'https://api.airtable.com/v0/appSMeiYtMiilbvhW/CustomerBase 2'
-var url_p4 = 'https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/VentesComparables'
-var url_p5 = '?filterByFormula=Ref_ID="'
 
 async function getToken(app_key, Key, url_p1, url_p2) {
   return axios.get(url_p1 + url_p2 + Key + '"', {
