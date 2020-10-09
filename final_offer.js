@@ -195,9 +195,7 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
   
   		// Replace HTML Before Setable
       var price_on_market_2 = value;
-      var equityunlock = Math.round(value * 0.9);
       $('#price_on_market_2').html((value).toString() + " 000 €");
-      $('#equityunlock').html((equityunlock).toString() + " 000 €");
   
   	  // Replace HTML content with price_on_market
       var price_on_market = value;
@@ -232,6 +230,9 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
       // Replace HTML content with net_proceed_vesta
       var net_proceed_vesta = Math.round(price_on_market - fees_vesta);
       $('#net_proceed_vesta').html((net_proceed_vesta).toString() + " 000 €");
+      
+      var equityunlock = net_proceed_vesta;
+      $('#equityunlock').html((equityunlock).toString() + " 000 €");
       
       // Replace HTML content with net_proceed
       var net_proceed = price_on_market - fees_traditional - seller_concession - fee_bridge_loan;
