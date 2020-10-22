@@ -206,8 +206,11 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
       $('.seller_concession').html((seller_concession).toString() + " 000 €");
       
       // Replace HTML content with fee_bridge_loan
-      var fee_bridge_loan = Math.round((price_on_market - seller_concession)  * 0.0226);
-      $('.fee_bridge_loan').html((fee_bridge_loan).toString() + " 000 €");
+      var fee_double_truck = 1.2 * 2 ;
+      var fee_storage = 0.12 * 3;
+      var fee_mid_term_lease =(price_on_market - seller_concession) / 20 / 12 * 3;
+      var fee_double_moving = Math.round(fee_double_truck + fee_storage + fee_mid_term_lease);
+      $('.fee_bridge_loan').html((fee_double_moving).toString() + " 000 €");
 
       // Replace HTML content with fees_vesta
       var fees_vesta = Math.round(costofservice);
@@ -235,7 +238,7 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
       $('#equityunlock').html((equityunlock).toString() + " 000 €");
       
       // Replace HTML content with net_proceed
-      var net_proceed = price_on_market - fees_traditional - seller_concession - fee_bridge_loan;
+      var net_proceed = price_on_market - fees_traditional - seller_concession - fee_double_moving;
       $('#net_proceed').html((net_proceed).toString() + " 000 €");
   });
 }
