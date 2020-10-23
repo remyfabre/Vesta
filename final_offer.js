@@ -2,6 +2,8 @@ document.getElementById("loading").addEventListener("load", redirect());
 
 if (navigator.userAgent.match(/Mobile/)) {
   document.getElementById('traditionnelle').innerHTML = 'Tradition';
+  document.getElementById('transactions').innerHTML = 'Coûts';
+  document.getElementById('double_demenagement').innerHTML = 'Frais de location';
 }
 
 $(document).ready(function() {
@@ -15,32 +17,27 @@ $(document).ready(function() {
     $('.section-redirect').show()
   }
 });
-
 function redirect() {
   window.setTimeout(function() {
     hideLoader();
   }, 3000);
 }
-
 function hideLoader() {
   $(document).ready(function() {
     $('#loading').fadeOut();
     $('#loader').fadeOut();
   });
 }
-
 function hideShield() {
   $(document).ready(function() {
     $('#shield').hide(250);
   });
 }
-
 function ShowShield() {
   $(document).ready(function() {
     $('#shield').show(250);
   });
 }
-
 function ChangeButton() {
   $(document).ready(function() {
     $('.id-signature').css('background-color', '#2CC8A7');
@@ -49,7 +46,6 @@ function ChangeButton() {
     $('.id-signature').css('box-shadow', 'none');
   });
 }
-
 $(document).ready(function() {
   $(".id-1").click(function() {
     window.scrollTo({
@@ -77,33 +73,27 @@ $(document).ready(function() {
     document.getElementById("submit-2").click();
   });
 });
-
 var valuation = Number(document.getElementById('value-new').innerHTML.replace(/€| /g, ""));
 var moving_date = document.getElementById('MovingDate').innerHTML
-
 if (moving_date === "") {
     moving_date = " selon votre propre emploi du temps"
 } else {
 		moving_date = " le " + moving_date
 }
-
 var est_final_sale_price = Math.round(valuation/1000);
 var max = Math.round(est_final_sale_price * 1.2);
 var min = Math.round(est_final_sale_price * 0.80);
 var rangeSlider4 = document.getElementById('slider-10');
 var new_count = 0;
-
 // implement html modifications
 document.getElementById('value-new').innerHTML = est_final_sale_price.toString() + " 000 €";
 document.getElementById('movingdate').innerHTML = moving_date;
 var myCookie = getCookie('already_signed');
-
 if (myCookie == null) {
   document.cookie = 'already_signed' + "=" + 'waiting to sign' + 30 + "; path=/";
 } else {
 	ChangeButton();
 }
-
 function getCookie(name) {
   var cookie = document.cookie;
   var prefix = name + "=";
@@ -120,7 +110,6 @@ function getCookie(name) {
   }
   return unescape(cookie.substring(begin + prefix.length, end));
 }
-
 noUiSlider.create(rangeSlider4, {
   start: [est_final_sale_price],
   step: 1000 / 1000,
@@ -140,7 +129,6 @@ noUiSlider.create(rangeSlider4, {
     })
   }
 });
-
 rangeSlider4.noUiSlider.on('update', function(values, handle) {
   var fixed_value = valuation / 1000;
   var value = Math.round(values[handle]);
@@ -189,33 +177,26 @@ rangeSlider4.noUiSlider.on('update', function(values, handle) {
     SetTable(value, costguarantee, costofservice, guaranteed_net_proceed);
   }
 });
-
 function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, floating_net_proceed) {
   $(document).ready(function() {
-  
   		// Replace HTML Before Setable
       var price_on_market_2 = value;
       $('#price_on_market_2').html((value).toString() + " 000 €");
-  
   	  // Replace HTML content with price_on_market
       var price_on_market = value;
       $('.price_on_market').html((price_on_market).toString() + " 000 €");
-      
       // Replace HTML content with seller_concession
       var seller_concession = Math.round(price_on_market * 0.035);
       $('.seller_concession').html((seller_concession).toString() + " 000 €");
-      
       // Replace HTML content with fee_bridge_loan
       var fee_double_truck = 1.2 * 2 ;
       var fee_storage = 0.12 * 3;
       var fee_mid_term_lease =(price_on_market - seller_concession) / 20 / 12 * 3;
       var fee_double_moving = Math.round(fee_double_truck + fee_storage + fee_mid_term_lease);
       $('.fee_bridge_loan').html((fee_double_moving).toString() + " 000 €");
-
       // Replace HTML content with fees_vesta
       var fees_vesta = Math.round(costofservice);
       $('#fees_vesta').html((fees_vesta).toString() + " 000 €");
-      
       // Replace HTML content with fees_traditional
       if (value <= 130) {
         var fees_traditional = 9;
@@ -227,16 +208,12 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
       	var fees_traditional = Math.round((0.05) * price_on_market);
         if (fees_traditional < 10) {fees_traditional = 10}
       }
-      
       $('#fees_traditional').html((fees_traditional).toString() + " 000 €");
-      
       // Replace HTML content with net_proceed_vesta
       var net_proceed_vesta = Math.round(price_on_market - fees_vesta);
       $('#net_proceed_vesta').html((net_proceed_vesta).toString() + " 000 €");
-      
       var equityunlock = net_proceed_vesta;
       $('#equityunlock').html((equityunlock).toString() + " 000 €");
-      
       // Replace HTML content with net_proceed
       var net_proceed = price_on_market - fees_traditional - seller_concession - fee_double_moving;
       $('#net_proceed').html((net_proceed).toString() + " 000 €");
