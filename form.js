@@ -76,9 +76,7 @@ for (var i = 0; i < cookieArr.length; i++) {
 	}
 }
 
-//var region = HomeAddress[2].substring(0, 2)
-var region = "59"
-
+var region = HomeAddress[2].substring(0, 2)
 
 $(document).ready(function() {
   if ((region !== "59")) {
@@ -89,11 +87,10 @@ $(document).ready(function() {
 document.getElementById("Home Address 1").innerHTML = (HomeAddress[0] + ' ' + HomeAddress[1]);
 document.getElementById("Home Address 2").innerHTML = (HomeAddress[2] + ' ' + HomeAddress[3]);
 document.getElementById("Home Address 3").innerHTML = (HomeAddress[5]);
+var New_Adresse = HomeAddress[0] + ' ' + HomeAddress[1] + ' ' + HomeAddress[2] + ' ' + HomeAddress[3]
 
 // Get the land's surface area from IGPN
-function ImportDataSlide2() {
-
-  var Adresse = HomeAddress[0] + ' ' + HomeAddress[1] + ' ' + HomeAddress[2] + ' ' + HomeAddress[3]
+function ImportDataSlide2(New_Adresse) {
 
   var URL = 'https://geocodage.ign.fr/look4/address/search?&q='+ Adresse + '&returnTrueGeometry=true'
 
@@ -261,7 +258,7 @@ $(document).ready(function() {
   });
 });
 
-document.getElementById("startbutton").onclick = function() {ImportDataSlide2()};
+document.getElementById("startbutton").onclick = function() {ImportDataSlide2(New_Adresse)};
 
 $(document).ready(function() {
 	$("#apartmentsizesqft").keyup(function() {
