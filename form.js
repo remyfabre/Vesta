@@ -94,7 +94,6 @@ document.getElementById("Home Address 3").innerHTML = (HomeAddress[5]);
 function ImportDataSlide2() {
 
   var Adresse = HomeAddress[0] + ' ' + HomeAddress[1] + ' ' + HomeAddress[2] + ' ' + HomeAddress[3]
-  var Adresse = "60 Rue du General Leclerc 59350 Saint-André-lez-Lille"
 
   var URL = 'https://geocodage.ign.fr/look4/address/search?&q='+ Adresse + '&returnTrueGeometry=true'
 
