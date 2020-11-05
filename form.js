@@ -92,7 +92,7 @@ var New_Adresse = HomeAddress[0] + ' ' + HomeAddress[1] + ' ' + HomeAddress[2] +
 // Get the land's surface area from IGPN
 function ImportDataSlide2(New_Adresse) {
 
-  var URL = 'https://geocodage.ign.fr/look4/address/search?&q='+ Adresse + '&returnTrueGeometry=true'
+  var URL = 'https://geocodage.ign.fr/look4/address/search?&q='+ New_Adresse + '&returnTrueGeometry=true'
 
   axios.get(URL).then(resp => {
     var coordinates = JSON.stringify(resp.data.features[0].properties.houseNumberInfos.otherPositions[0].geometry);
