@@ -1,3 +1,18 @@
+document.getElementById("loading").addEventListener("load", redirect());
+
+function redirect() {
+  window.setTimeout(function() {
+    hideLoader();
+  }, 1500);
+}
+
+function hideLoader() {
+  $(document).ready(function() {
+    $('#loading').fadeOut();
+    $('#loader').fadeOut();
+  });
+}
+
 var HomeAddress = HomeAddress || [];
 var componentForm = [
 	"street_number",
@@ -61,11 +76,13 @@ for (var i = 0; i < cookieArr.length; i++) {
 	}
 }
 
-var region = HomeAddress[2].substring(0, 2)
+//var region = HomeAddress[2].substring(0, 2)
+var region = "59"
+
 
 $(document).ready(function() {
   if ((region !== "59")) {
-	$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible')
+	$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible');
   }
 });
 
@@ -73,6 +90,74 @@ document.getElementById("Home Address 1").innerHTML = (HomeAddress[0] + ' ' + Ho
 document.getElementById("Home Address 2").innerHTML = (HomeAddress[2] + ' ' + HomeAddress[3]);
 document.getElementById("Home Address 3").innerHTML = (HomeAddress[5]);
 
+// Get the land's surface area from IGPN
+function ImportDataSlide2() {
+
+  var Adresse = HomeAddress[0] + ' ' + HomeAddress[1] + ' ' + HomeAddress[2] + ' ' + HomeAddress[3]
+  var Adresse = "60 Rue du General Leclerc 59350 Saint-André-lez-Lille"
+
+  var URL = 'https://geocodage.ign.fr/look4/address/search?&q='+ Adresse + '&returnTrueGeometry=true'
+
+  axios.get(URL).then(resp => {
+    var coordinates = JSON.stringify(resp.data.features[0].properties.houseNumberInfos.otherPositions[0].geometry);
+    var URL_2 = 'https://geocodage.ign.fr/look4/parcel/reverse?searchGeom=' + coordinates
+
+    axios.get(URL_2).then(resp => {
+      var Landref = resp.data.features[0].properties.identifiant
+      var URL_3 = 'https://geocodage.ign.fr/look4/parcel/search?&q=' + Landref + '&returnTrueGeometry=true'
+
+      axios.get(URL_3).then(resp => {
+        getSurfaceArea(resp.data);
+      });
+    });
+  });
+
+  function getSurfaceArea(json) {
+
+    var coordinates = JSON.stringify(json.features[0].properties.trueGeometry.coordinates[0]);
+
+    var polygons = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": JSON.parse(coordinates),
+          }
+        },
+      ]
+    };
+
+    if (document.getElementById("apartment").checked) {
+      document.getElementById('yearbuilt').selectedIndex = "2";
+    } else if (document.getElementById("house").checked) {
+      document.getElementById('yearbuilt').selectedIndex = "2";
+      document.getElementById('dpecategory').selectedIndex = "2";
+      document.getElementById("landsizesqft").value = Math.round(turf.area(polygons));
+    }
+
+    $(document).ready(function() {
+      if ($("#landsizesqft").val() <= 1000000 && $("#landsizesqft").val() >= 1) {
+        document.getElementById("divlandsizesqft").style.borderColor = "#f8f6f4";
+        document.getElementById("error1landsizesqft").style.display = 'none';
+        document.getElementById("error2landsizesqft").style.display = 'none';
+        bool2 = true;
+      } else if (!$("#landsizesqft").val()) {
+        document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
+        document.getElementById("error1landsizesqft").style.display = 'none';
+        document.getElementById("error2landsizesqft").style.display = 'block';
+        bool2 = false;
+      } else {
+        document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
+        document.getElementById("error2landsizesqft").style.display = 'none';
+        document.getElementById("error1landsizesqft").style.display = 'block';
+        bool2 = false;
+      }
+    });
+  }
+}
 
 // Get each component of the address from the place details,
 // and then fill-in the corresponding field on the form.
@@ -115,8 +200,8 @@ document.getElementById("startbutton").style.backgroundColor = "#f8f6f4";
 document.getElementById("startbutton").style.opacity = "0.5";
 
 $(document).ready(function() {
-	$("input[name='owner']").click(function() {
-		if ($("input[name='owner']:checked").val()) {
+	$("input[name='hometype']").click(function() {
+		if ($("input[name='hometype']:checked").val()) {
 			$('#startbutton').prop('disabled', false);
 			document.getElementById("startbutton").style.color = "#ffffff";
 			document.getElementById("startbutton").style.backgroundColor = "#1277e1";
@@ -126,26 +211,10 @@ $(document).ready(function() {
 });
 
 $('#buttonslide2').prop('disabled', true);
-document.getElementById("buttonslide2").style.color = "#62636b";
-document.getElementById("buttonslide2").style.backgroundColor = "#f8f6f4";
-document.getElementById("buttonslide2").style.opacity = "0.5";
-
-$(document).ready(function() {
-	$("input[name='hometype']").click(function() {
-		if ($("input[name='hometype']:checked").val()) {
-			$('#buttonslide2').prop('disabled', false);
-			document.getElementById("buttonslide2").style.color = "#ffffff";
-			document.getElementById("buttonslide2").style.backgroundColor = "#1277e1";
-			document.getElementById("buttonslide2").style.opacity = "1";
-		}
-	});
-});
-
-$('#buttonslide3').prop('disabled', true);
-var buttonslide3 = document.getElementById("buttonslide3");
-buttonslide3.style.color = "#62636b";
-buttonslide3.style.backgroundColor = "#f8f6f4";
-buttonslide3.style.opacity = "0.5";
+var buttonslide2 = document.getElementById("buttonslide2");
+buttonslide2.style.color = "#62636b";
+buttonslide2.style.backgroundColor = "#f8f6f4";
+buttonslide2.style.opacity = "0.5";
 var bool1 = false,
 	bool2 = false,
 	bool3 = false,
@@ -173,41 +242,27 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$("#landsizesqft").keyup(function() {
-		if ($("#landsizesqft").val() <= 1000000 && $("#landsizesqft").val() >= 1) {
-			document.getElementById("divlandsizesqft").style.borderColor = "#f8f6f4";
-			document.getElementById("error1landsizesqft").style.display = 'none';
-			document.getElementById("error2landsizesqft").style.display = 'none';
-			bool2 = true;
-		} else if (!$("#landsizesqft").val()) {
-			document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
-			document.getElementById("error1landsizesqft").style.display = 'none';
-			document.getElementById("error2landsizesqft").style.display = 'block';
-			bool2 = false;
-		} else {
-			document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
-			document.getElementById("error2landsizesqft").style.display = 'none';
-			document.getElementById("error1landsizesqft").style.display = 'block';
-			bool2 = false;
-		}
-	});
+  $("#landsizesqft").keyup(function() {
+    if ($("#landsizesqft").val() <= 1000000 && $("#landsizesqft").val() >= 1) {
+      document.getElementById("divlandsizesqft").style.borderColor = "#f8f6f4";
+      document.getElementById("error1landsizesqft").style.display = 'none';
+      document.getElementById("error2landsizesqft").style.display = 'none';
+      bool2 = true;
+    } else if (!$("#landsizesqft").val()) {
+      document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
+      document.getElementById("error1landsizesqft").style.display = 'none';
+      document.getElementById("error2landsizesqft").style.display = 'block';
+      bool2 = false;
+    } else {
+      document.getElementById("divlandsizesqft").style.borderColor = "#ed6a5e";
+      document.getElementById("error2landsizesqft").style.display = 'none';
+      document.getElementById("error1landsizesqft").style.display = 'block';
+      bool2 = false;
+    }
+  });
 });
 
-$(document).ready(function() {
-	$("#availablelandsizesqft").keyup(function() {
-		if ($("#availablelandsizesqft").val() <= 10000 && $("#availablelandsizesqft").val() >= 0) {
-			document.getElementById("divavailablelandsizesqft").style.borderColor = "#f8f6f4";
-			document.getElementById("error1availablelandsizesqft").style.display = 'none';
-			document.getElementById("error2availablelandsizesqft").style.display = 'none';
-			bool3 = true;
-		} else {
-			document.getElementById("divavailablelandsizesqft").style.borderColor = "#ed6a5e";
-			document.getElementById("error2availablelandsizesqft").style.display = 'none';
-			document.getElementById("error1availablelandsizesqft").style.display = 'block';
-			bool3 = false;
-		}
-	});
-});
+document.getElementById("startbutton").onclick = function() {ImportDataSlide2()};
 
 $(document).ready(function() {
 	$("#apartmentsizesqft").keyup(function() {
@@ -231,31 +286,31 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide3").keyup(function() {
-		if (bool1 == true && bool2 == true && bool3 == true) {
-			$('#buttonslide3').prop('disabled', false);
-			buttonslide3.style.color = "#ffffff";
-			buttonslide3.style.backgroundColor = "#1277e1";
-			buttonslide3.style.opacity = "1";
+	$("#formcontentslide2").keyup(function() {
+		if (bool1 == true && bool2 == true) {
+			$('#buttonslide2').prop('disabled', false);
+			buttonslide2.style.color = "#ffffff";
+			buttonslide2.style.backgroundColor = "#1277e1";
+			buttonslide2.style.opacity = "1";
 		} else if (bool4 == true) {
-			$('#buttonslide3').prop('disabled', false);
-			buttonslide3.style.color = "#ffffff";
-			buttonslide3.style.backgroundColor = "#1277e1";
-			buttonslide3.style.opacity = "1";
+			$('#buttonslide2').prop('disabled', false);
+			buttonslide2.style.color = "#ffffff";
+			buttonslide2.style.backgroundColor = "#1277e1";
+			buttonslide2.style.opacity = "1";
 		} else {
-			$('#buttonslide3').prop('disabled', true);
-			buttonslide3.style.color = "#62636b";
-			buttonslide3.style.backgroundColor = "#f8f6f4";
-			buttonslide3.style.opacity = "0.5";
+			$('#buttonslide2').prop('disabled', true);
+			buttonslide2.style.color = "#62636b";
+			buttonslide2.style.backgroundColor = "#f8f6f4";
+			buttonslide2.style.opacity = "0.5";
 		}
 	});
 });
 
-$('#buttonslide4').prop('disabled', true);
-var buttonslide4 = document.getElementById("buttonslide4");
-buttonslide4.style.color = "#62636b";
-buttonslide4.style.backgroundColor = "#f8f6f4";
-buttonslide4.style.opacity = "0.5";
+$('#buttonslide3').prop('disabled', true);
+var buttonslide3 = document.getElementById("buttonslide3");
+buttonslide3.style.color = "#62636b";
+buttonslide3.style.backgroundColor = "#f8f6f4";
+buttonslide3.style.opacity = "0.5";
 
 $('#up1').click(function() {
 	var val = parseInt($('#bathroomcnt').val(), 10);
@@ -314,6 +369,7 @@ $('#down').click(function() {
 $('#up2').click(function() {
 	var val1 = parseInt($('#roomcnt').val(), 10);
 	var val2 = parseInt($('#bedroomcnt').val(), 10);
+  $('#roomcnt').val(Math.round($('#bedroomcnt').val()) + 2);
 	if (val2) {
 		if (val1 <= val2) {
 			$('#bedroomcnt').val($('#roomcnt').val());
@@ -332,6 +388,7 @@ $('#up2').click(function() {
 $('#down2').click(function() {
 	var val1 = parseInt($('#roomcnt').val(), 10);
 	var val2 = parseInt($('#bedroomcnt').val(), 10);
+  $('#roomcnt').val(Math.round($('#bedroomcnt').val()));
 	if (val2) {
 		if (val1 < val2) {
 			$('#bedroomcnt').val($('#roomcnt').val());
@@ -379,27 +436,27 @@ $('#bedroomcnt').keyup(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide4").on("click keyup", function() {
-		var buttonslide4 = document.getElementById("buttonslide4");
+	$("#formcontentslide3").on("click keyup", function() {
+		var buttonslide3 = document.getElementById("buttonslide3");
 		if ($('#roomcnt').val() && $('#bathroomcnt').val() && $('#bedroomcnt').val()) {
-			$('#buttonslide4').prop('disabled', false);
-			buttonslide4.style.color = "#ffffff";
-			buttonslide4.style.backgroundColor = "#1277e1";
-			buttonslide4.style.opacity = "1";
+			$('#buttonslide3').prop('disabled', false);
+			buttonslide3.style.color = "#ffffff";
+			buttonslide3.style.backgroundColor = "#1277e1";
+			buttonslide3.style.opacity = "1";
 		} else {
-			$('#buttonslide4').prop('disabled', true);
-			buttonslide4.style.color = "#62636b";
-			buttonslide4.style.backgroundColor = "#f8f6f4";
-			buttonslide4.style.opacity = "0.5";
+			$('#buttonslide3').prop('disabled', true);
+			buttonslide3.style.color = "#62636b";
+			buttonslide3.style.backgroundColor = "#f8f6f4";
+			buttonslide3.style.opacity = "0.5";
 		}
 	});
 });
 
-$('#buttonslide5').prop('disabled', true);
-var buttonslide5 = document.getElementById("buttonslide5");
-buttonslide5.style.color = "#62636b";
-buttonslide5.style.backgroundColor = "#f8f6f4";
-buttonslide5.style.opacity = "0.5";
+$('#buttonslide4').prop('disabled', true);
+var buttonslide4 = document.getElementById("buttonslide4");
+buttonslide4.style.color = "#62636b";
+buttonslide4.style.backgroundColor = "#f8f6f4";
+buttonslide4.style.opacity = "0.5";
 
 var count = 0;
 
@@ -541,27 +598,27 @@ $('#floorscnt').keyup(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide5").on("click keyup", function() {
-		var buttonslide5 = document.getElementById("buttonslide5");
+	$("#formcontentslide4").on("click keyup", function() {
+		var buttonslide5 = document.getElementById("buttonslide4");
 		if ($('#floorscnt').val() && $('#buildingfloorscnt').val() || $('#housefloorscnt').val()) {
-			$('#buttonslide5').prop('disabled', false);
-			buttonslide5.style.color = "#ffffff";
-			buttonslide5.style.backgroundColor = "#1277e1";
-			buttonslide5.style.opacity = "1";
+			$('#buttonslide4').prop('disabled', false);
+			buttonslide4.style.color = "#ffffff";
+			buttonslide4.style.backgroundColor = "#1277e1";
+			buttonslide4.style.opacity = "1";
 		} else {
-			$('#buttonslide5').prop('disabled', true);
-			buttonslide5.style.color = "#62636b";
-			buttonslide5.style.backgroundColor = "#f8f6f4";
-			buttonslide5.style.opacity = "0.5";
+			$('#buttonslide4').prop('disabled', true);
+			buttonslide4.style.color = "#62636b";
+			buttonslide4.style.backgroundColor = "#f8f6f4";
+			buttonslide4.style.opacity = "0.5";
 		}
 	});
 });
 
-$('#buttonslide6').prop('disabled', true);
-var buttonslide6 = document.getElementById("buttonslide6");
-buttonslide6.style.color = "#62636B";
-buttonslide6.style.backgroundColor = "#F8F6F4";
-buttonslide6.style.opacity = "0.5";
+$('#buttonslide5').prop('disabled', true);
+var buttonslide5 = document.getElementById("buttonslide5");
+buttonslide5.style.color = "#62636B";
+buttonslide5.style.backgroundColor = "#F8F6F4";
+buttonslide5.style.opacity = "0.5";
 
 $('.upslide6').click(function() {
 	var $input = $(this).parents('.form-input-card').find('.inputslide6');
@@ -594,15 +651,15 @@ $('.inputslide6').keyup(function() {
 });
 
 $(document).ready(function() {
-	$("#formcontentslide6").on("click keyup", function() {
-		var buttonslide6 = document.getElementById("buttonslide6");
+	$("#formcontentslide5").on("click keyup", function() {
+		var buttonslide6 = document.getElementById("buttonslide5");
 		if ($('#boxgaragecnt').val() && $('#garagecarcnt').val()) {
-			$('#buttonslide6').prop('disabled', false);
+			$('#buttonslide5').prop('disabled', false);
 			buttonslide6.style.color = "#FFFFFF";
 			buttonslide6.style.backgroundColor = "#1277E1";
 			buttonslide6.style.opacity = "1";
 		} else {
-			$('#buttonslide6').prop('disabled', true);
+			$('#buttonslide5').prop('disabled', true);
 			buttonslide6.style.color = "#62636B";
 			buttonslide6.style.backgroundColor = "#F8F6F4";
 			buttonslide6.style.opacity = "0.5";
@@ -610,11 +667,11 @@ $(document).ready(function() {
 	});
 });
 
-$('#buttonslide7').prop('disabled', true);
-var buttonslide7 = document.getElementById("buttonslide7");
-buttonslide7.style.color = "#62636B";
-buttonslide7.style.backgroundColor = "#F8F6F4";
-buttonslide7.style.opacity = "0.5";
+$('#buttonslide6').prop('disabled', true);
+var buttonslide6 = document.getElementById("buttonslide6");
+buttonslide6.style.color = "#62636B";
+buttonslide6.style.backgroundColor = "#F8F6F4";
+buttonslide6.style.opacity = "0.5";
 
 $('.inputslide7').change(function() {
 	var $input = $(this);
@@ -627,9 +684,32 @@ $('.inputslide7').change(function() {
 });
 
 $(document).ready(function() {
+  $("#formcontentslide6").click(function() {
+    var formcontentslide6 = document.getElementById("buttonslide6");
+    if($("input[type='checkbox']:checked").val()){
+      $('#buttonslide6').prop('disabled', false);
+      buttonslide6.style.color = "#FFFFFF";
+      buttonslide6.style.backgroundColor = "#1277E1";
+      buttonslide6.style.opacity = "1";
+    } else {
+      $('#buttonslide6').prop('disabled', true);
+      buttonslide6.style.color = "#62636B";
+      buttonslide6.style.backgroundColor = "#F8F6F4";
+      buttonslide6.style.opacity = "0.5";
+    }
+  });
+});
+
+$('#buttonslide7').prop('disabled', true);
+var buttonslide7 = document.getElementById("buttonslide7");
+buttonslide7.style.color = "#62636B";
+buttonslide7.style.backgroundColor = "#F8F6F4";
+buttonslide7.style.opacity = "0.5";
+
+$(document).ready(function() {
   $("#formcontentslide7").click(function() {
     var buttonslide7 = document.getElementById("buttonslide7");
-    if($("input[type='checkbox']:checked").val()){
+    if($("input[id='checkboxslide8']:checked").val()){
       $('#buttonslide7').prop('disabled', false);
       buttonslide7.style.color = "#FFFFFF";
       buttonslide7.style.backgroundColor = "#1277E1";
@@ -639,29 +719,6 @@ $(document).ready(function() {
       buttonslide7.style.color = "#62636B";
       buttonslide7.style.backgroundColor = "#F8F6F4";
       buttonslide7.style.opacity = "0.5";
-    }
-  });
-});
-
-$('#buttonslide8').prop('disabled', true);
-var buttonslide8 = document.getElementById("buttonslide8");
-buttonslide8.style.color = "#62636B";
-buttonslide8.style.backgroundColor = "#F8F6F4";
-buttonslide8.style.opacity = "0.5";
-
-$(document).ready(function() {
-  $("#formcontentslide8").click(function() {
-    var buttonslide8 = document.getElementById("buttonslide8");
-    if($("input[id='checkboxslide8']:checked").val()){
-      $('#buttonslide8').prop('disabled', false);
-      buttonslide8.style.color = "#FFFFFF";
-      buttonslide8.style.backgroundColor = "#1277E1";
-      buttonslide8.style.opacity = "1";
-    } else {
-      $('#buttonslide8').prop('disabled', true);
-      buttonslide8.style.color = "#62636B";
-      buttonslide8.style.backgroundColor = "#F8F6F4";
-      buttonslide8.style.opacity = "0.5";
     }
   });
 });
@@ -682,7 +739,6 @@ var dataName = [
   "situation",
   "sellingdate",
   "buyingtype",
-  "sellingconcern",
 ];
 
 $(document).ready(function() {
