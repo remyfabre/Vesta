@@ -1,5 +1,7 @@
 document.getElementById("loading").addEventListener("load", redirect());
 
+webhook_url = 'https://kvkjg46so8.execute-api.eu-west-3.amazonaws.com/GO';
+
 $(document).ready(function() {
   $(".buttonreevaluation").click(function() {
     disableScrolling();
@@ -43,11 +45,11 @@ $(document).ready(function() {
 Checkreevaluationanddeclined();
 async function Checkreevaluationanddeclined(){
   var self = this
-  var app_key = 'keyaq6UJ8xDxMHQjG';
   var column_name = 'ID';
   var recordID = document.getElementById('Record_ID').innerHTML;
   this.items = []
-  const response = await axios.get('https://api.airtable.com/v0/' + 'appNvBdQ4vqLJGmuO' + '/' + 'Estimation' + '?filterByFormula=' + column_name + '=' + '"' + recordID + '"', { headers: { Authorization: 'Bearer '+ app_key } } )
+  var airtable_url = 'https://api.airtable.com/v0/' + 'appNvBdQ4vqLJGmuO' + '/' + 'Estimation' + '?filterByFormula=' + column_name + '=' + '"' + recordID + '"';
+  const response = await axios.get(webhook_url, { params: {'url': airtable_url}})
   var checkifofferrefused = JSON.stringify(response.data.records[0].fields.Decline)
   var checkifreevaluationasked = JSON.stringify(response.data.records[0].fields.Reevaluation)
   if (checkifofferrefused == '"Yes"') {
@@ -76,11 +78,9 @@ function Setreevaluationanddeclined(type, new_info, radioValue) {
   } else {
   	var data = {'fields':{'Decline':'Yes', 'Nouvelles_informations': new_info, 'Raison_du_déclin': radioValue}}
   }
-
-  axios.patch("https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/Estimation/" + ID,
-  						data,
-              axiosConfig)
-}
+  
+  var airtable_url = "https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/Estimation/" + ID
+  axios.patch(webhook_url, {'url': airtable_url,'json_data': data})
 
 function disableScrolling() {
   var x = window.scrollX;
@@ -119,7 +119,6 @@ document.getElementById("container").onclick = function() {
   Getfilestack()
 };
 
-var app_key = 'keyaq6UJ8xDxMHQjG'
 var AddressKey = document.getElementById('AddressKey').innerHTML
 var IDKey = document.getElementById('Record_ID').innerHTML
 var Type = document.getElementById('Type').innerHTML
@@ -131,8 +130,8 @@ var url_p5 = '?filterByFormula=Ref_ID="'
 var url_p6 = 'https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/Estimation'
 var url_p7 = '?filterByFormula=Adresse="'
 
-const asynchronousFunction3 = async (app_key, AddressKey, url_p6, url_p7) => {
-  const response = await getToken(app_key, AddressKey, url_p6, url_p7);
+const asynchronousFunction3 = async (AddressKey, url_p6, url_p7) => {
+  const response = await getToken(AddressKey, url_p6, url_p7);
   for (const key of Object.keys(response['data']['records'])) {
     if (JSON.stringify(response['data']['records'][key]['fields']['Stage']) === '"Offre finale"') {
       var RecordID_redirect = response['data']['records'][key]['fields']['Record ID']
@@ -142,7 +141,7 @@ const asynchronousFunction3 = async (app_key, AddressKey, url_p6, url_p7) => {
   }
 }
 
-asynchronousFunction3(app_key, AddressKey, url_p6, url_p7);
+asynchronousFunction3(AddressKey, url_p6, url_p7);
 
 $(document).ready(function() {
   const date = new Date($('#date').html());
@@ -403,20 +402,21 @@ rangeSlider2.noUiSlider.on('update', function(values, handle) {
   }
 });
 
-async function getToken(app_key, Key, url_p1, url_p2) {
-  return axios.get(url_p1 + url_p2 + Key + '"', {
-    headers: {
-      Authorization: 'Bearer ' + app_key
+async function getToken(Key, url_p1, url_p2) {
+	var airtable_url = url_p1 + url_p2 + Key + '"';
+  return axios.get(webhook_url, {
+    params: {
+      'url': airtable_url
     }
   }).then(res => res);
 }
 
-const asynchronousFunction = async (app_key, AddressKey, url_p2) => {
-  const response = await getToken(app_key, AddressKey, url_p1, url_p2);
+const asynchronousFunction = async (AddressKey, url_p2) => {
+  const response = await getToken(AddressKey, url_p1, url_p2);
   if (Object.keys(response['data']['records']).length == 0) {
     hide_div_referral()
   }
-  const response_url = await getToken(app_key, AddressKey, url_p3, url_p2);
+  const response_url = await getToken(AddressKey, url_p3, url_p2);
   var ref_count = response['data']['records']['0']['fields']['Total_referred_count']
   var ranking = response['data']['records']['0']['fields']['Ranking']
   url = response_url['data']['records']['0']['fields']['referral_URL']
@@ -431,8 +431,8 @@ const asynchronousFunction = async (app_key, AddressKey, url_p2) => {
   };
 }
 
-const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
-  const response_comps = await getToken(app_key, IDKey, url_p4, url_p5);
+const asynchronousFunction2 = async (IDKey, url_p5, Type) => {
+  const response_comps = await getToken(IDKey, url_p4, url_p5);
   var size = Object.keys(response_comps['data']['records']).length
   var new_var = 0
 
@@ -471,8 +471,8 @@ const asynchronousFunction2 = async (app_key, IDKey, url_p5, Type) => {
   }
 }
 
-asynchronousFunction(app_key, AddressKey, url_p2);
-asynchronousFunction2(app_key, IDKey, url_p5, Type);
+asynchronousFunction(AddressKey, url_p2);
+asynchronousFunction2(IDKey, url_p5, Type);
 
 function hide_div() {
   $(document).ready(function() {
