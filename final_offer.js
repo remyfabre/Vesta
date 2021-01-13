@@ -214,6 +214,7 @@ function SetTable(value, costguarantee, costofservice, guaranteed_net_proceed, f
       $('#net_proceed_vesta').html((net_proceed_vesta).toString() + " 000 €");
       var equityunlock = net_proceed_vesta;
       $('#equityunlock').html((equityunlock).toString() + " 000 €");
+      $('#price_on_market_2').html((equityunlock).toString() + " 000 €");
       // Replace HTML content with net_proceed
       var net_proceed = price_on_market - fees_traditional - seller_concession - fee_double_moving;
       $('#net_proceed').html((net_proceed).toString() + " 000 €");
