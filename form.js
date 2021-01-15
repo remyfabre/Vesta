@@ -745,7 +745,6 @@ $(document).ready(function() {
   $('.formcontentslideradio').change(function() {
     for (var i = 0; i <= dataName.length; i++) {
       var input = 'input[name=' + "'" + dataName[i] + "'" + ']:checked';
-      alert(input);
       if($(input).val()) {
         $("#buttonslideradio" + (i + 1)).prop('disabled', false);
         $("#buttonslideradio" + (i + 1)).css({"background-color": "#1277E1", "color": "#FFFFFF", "opacity": "1"});
