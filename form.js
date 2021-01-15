@@ -724,6 +724,7 @@ $(document).ready(function() {
 $('.buttonslideradio').prop('disabled', true);
 $('.buttonslideradio').css({"background-color": "#F8F6F4", "color": "#62636B", "opacity": "0.5"});
 
+
 var dataName = [
   "kitchenquality",
   "kitchencondition",
@@ -737,12 +738,14 @@ var dataName = [
   "situation",
   "sellingdate",
   "buyingtype",
+  "channel",
 ];
 
 $(document).ready(function() {
   $('.formcontentslideradio').change(function() {
     for (var i = 0; i <= dataName.length; i++) {
       var input = 'input[name=' + "'" + dataName[i] + "'" + ']:checked';
+      alert(input);
       if($(input).val()) {
         $("#buttonslideradio" + (i + 1)).prop('disabled', false);
         $("#buttonslideradio" + (i + 1)).css({"background-color": "#1277E1", "color": "#FFFFFF", "opacity": "1"});
