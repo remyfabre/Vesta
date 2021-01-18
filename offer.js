@@ -64,7 +64,6 @@ async function Checkreevaluationanddeclined(){
 function Setreevaluationanddeclined(type, new_info, radioValue) {
 
   var ID = window.location.href.substr(window.location.href.length - 17)
-  var ID = "recNmwpYLfmz2ulJS"
   
   let axiosConfig = {
     headers: {
