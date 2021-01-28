@@ -142,7 +142,7 @@ const asynchronousFunction3 = async (app_key, AddressKey, url_p6, url_p7) => {
   }
 }
 
-asynchronousFunction3(app_key, AddressKey, url_p6, url_p7);
+// asynchronousFunction3(app_key, AddressKey, url_p6, url_p7);
 
 $(document).ready(function() {
   const date = new Date($('#date').html());
