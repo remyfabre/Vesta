@@ -2,14 +2,90 @@ document.getElementById("loading").addEventListener("load", redirect());
 
 webhook_url = 'https://kvkjg46so8.execute-api.eu-west-3.amazonaws.com/GO';
 
+// Patch airtable record
+async function CustomerFeedback(type){
+
+  var ID = window.location.href.substr(window.location.href.length - 17)
+  
+  if (type == "underpriced") {
+  	var data = {'fields':{'Feedback Client':'Offre trop basse'}}
+  } else if (type == "overpriced") {
+  	var data = {'fields':{'Feedback Client':'Offre trop haute'}}
+  } else {
+    var data = {'fields':{'Feedback Client':'Offre juste'}}
+  }
+
+  var airtable_url = "https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/Estimation/" + ID
+  axios.patch(webhook_url, {'url': airtable_url,'json_data': data})
+  
+};
+
+// Extract current record data from airtable
+async function DuplicateAirtableRecord(){
+
+  var self = this
+  var recordID = document.getElementById('Record_ID').innerHTML;
+  this.items = []
+  
+  var airtable_url = 'https://api.airtable.com/v0/' + 'appNvBdQ4vqLJGmuO' + '/' + 'Estimation' 
+  var airtable_url_get = airtable_url + '?filterByFormula=' + 'ID' + '=' + '"' + recordID + '"';
+  var airtable_url_post = airtable_url;
+  
+  const response = await axios.get(webhook_url, { params: {'url': airtable_url_get}})
+  
+  var data_post = response.data
+  
+  delete data_post.records[0].id
+  delete data_post.records[0].createdTime
+  
+  array = ['ID','Label','City','MER','Comission Vesta','Bookings','Vesta Adjusted','Comps','Prix passé m2','Prix actuel m2','Passé','Actuel','Alert_Important_Issues','Alert_Indexes','Alert_Home_Value','Alert_Serviceable_Areas','Alert_Home_Size','Alert_Land_Size','RecordIdDuplicate','Record ID','Date de submission','Prix actuel m2', 'Actuel','Type_text']
+  
+  var Old_record_ID = data_post.records[0]['fields']['Record ID']
+  
+  for (const property of array) {
+  	delete data_post.records[0]['fields'][property];
+	}
+  
+  data_post.records[0]['fields']['ID'] = makeid(14);
+  data_post.records[0]['fields']['Reevaluation'] = "Yes"
+  data_post.records[0]['fields']['Stage'] = 'Réévaluation demandée';
+  data_post.records[0]['fields']['E-mail'] = "louis@wevesta.com";
+  data_post.records[0]['fields']['Record Ancien Deal'] = Old_record_ID;
+  data_post['typecast'] = true;
+  
+  // Duplicate record
+  axios.post(webhook_url, {'url': airtable_url_post,'json_data': data_post})
+};
+
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
+
 $(document).ready(function() {
   $(".buttonreevaluation").click(function() {
     disableScrolling();
     $("#reevaluation").show();
+    DuplicateAirtableRecord();
   });
   $(".buttondecliner").click(function() {
     disableScrolling();
     $("#decliner").show();
+  });
+  $(".offer-too-low").click(function() {
+		CustomerFeedback('underpriced')
+  });
+  $(".offer-fair").click(function() {
+		CustomerFeedback('fair')
+  });
+  $(".offer-over-priced").click(function() {
+		CustomerFeedback('overpriced')
   });
   $("#formsubmit").click(function() {
     if ($("#Message").val()) {
@@ -64,13 +140,6 @@ async function Checkreevaluationanddeclined(){
 function Setreevaluationanddeclined(type, new_info, radioValue) {
 
   var ID = window.location.href.substr(window.location.href.length - 17)
-  
-  let axiosConfig = {
-    headers: {
-      'Authorization': 'Bearer keyaq6UJ8xDxMHQjG',
-      'Content-Type': 'application/json'
-    }
-  };
   
   if (type == "reevaluation") {
   	var data = {'fields':{'Reevaluation':'Yes', 'Nouvelles_informations': new_info}}
