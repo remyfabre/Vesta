@@ -49,7 +49,6 @@ async function DuplicateAirtableRecord(){
   data_post.records[0]['fields']['ID'] = makeid(14);
   data_post.records[0]['fields']['Reevaluation'] = "Yes"
   data_post.records[0]['fields']['Stage'] = 'Réévaluation demandée';
-  data_post.records[0]['fields']['E-mail'] = "louis@wevesta.com";
   data_post.records[0]['fields']['Record Ancien Deal'] = Old_record_ID;
   data_post['typecast'] = true;
   
