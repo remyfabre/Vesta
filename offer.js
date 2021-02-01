@@ -333,6 +333,7 @@ var rangeSlider3 = document.getElementById('slider-3');
 
 // implement html modifications
 document.getElementById('value').innerHTML = min.toString() + "-" + max.toString() + " k€";
+document.getElementById('value_2').innerHTML = min.toString() + "-" + max.toString() + " k€";
 
 noUiSlider.create(rangeSlider, {
   start: [valuation / 1000],
