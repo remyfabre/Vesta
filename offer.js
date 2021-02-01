@@ -106,7 +106,7 @@ $(document).ready(function() {
   });
   $("#formsubmit2").click(function() {
     if ($("#Message-3").val()) {
-    	var new_info = document.getElementById("Message-3").value
+      var new_info = 'Aucune nouvelles informations'
       var radioValue = $("input[name='owner']:checked").val();
       if (radioValue === undefined){radioValue = 'Non précisé'}
       $("#sliderright-2").click();
