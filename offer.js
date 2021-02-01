@@ -21,7 +21,7 @@ async function CustomerFeedback(type){
 };
 
 // Extract current record data from airtable
-async function DuplicateAirtableRecord(){
+async function DuplicateAirtableRecord(asktype){
 
   var self = this
   var recordID = document.getElementById('Record_ID').innerHTML;
@@ -48,7 +48,13 @@ async function DuplicateAirtableRecord(){
   
   data_post.records[0]['fields']['ID'] = makeid(14);
   data_post.records[0]['fields']['Reevaluation'] = "Yes"
-  data_post.records[0]['fields']['Stage'] = 'Réévaluation demandée';
+  
+  if (asktype == "Réévaluation demandée") {
+  	data_post.records[0]['fields']['Stage'] = asktype;
+  } else if (asktype == "Nouvelle offre demandée") {
+  	data_post.records[0]['fields']['Stage'] = asktype;
+  }
+  
   data_post.records[0]['fields']['Record Ancien Deal'] = Old_record_ID;
   data_post['typecast'] = true;
   
@@ -71,7 +77,10 @@ $(document).ready(function() {
   $(".buttonreevaluation").click(function() {
     disableScrolling();
     $("#reevaluation").show();
-    DuplicateAirtableRecord();
+    DuplicateAirtableRecord("Réévaluation demandée");
+  });
+  $(".buttonexpired").click(function() {
+    DuplicateAirtableRecord("Nouvelle offre demandée");
   });
   $(".buttondecliner").click(function() {
     disableScrolling();
@@ -223,11 +232,10 @@ $(document).ready(function() {
     day: 'numeric'
   }
   $('.date').html(expiring_date.toLocaleString('fr-FR', options));
+  $('.date-2').html(expiring_date.toLocaleString('fr-FR', options));
   if (today > expiring_date) {
-    $("#home").hide();
-    $("#section-redirect").show();
-  } else {
-    $("#navbar_menu_icon").show();
+    $("#new-slider-1-1").hide();
+    $("#new-slider-1-2").show();
   }
 });
 
