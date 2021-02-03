@@ -38,7 +38,7 @@ async function DuplicateAirtableRecord(asktype){
   delete data_post.records[0].id
   delete data_post.records[0].createdTime
   
-  array = ['ID','Label','City','MER','Comission Vesta','Bookings','Vesta Adjusted','Comps','Prix passé m2','Prix actuel m2','Passé','Actuel','Alert_Important_Issues','Alert_Indexes','Alert_Home_Value','Alert_Serviceable_Areas','Alert_Home_Size','Alert_Land_Size','RecordIdDuplicate','Record ID','Date de submission','Prix actuel m2', 'Actuel','Type_text']
+  array = ['ID','Label','City','MER','Comission Vesta','Bookings','Vesta Adjusted','Comps','Prix passé m2','Prix actuel m2','Passé','Actuel','Alert_Important_Issues','Alert_Indexes','Alert_Home_Value','Alert_Serviceable_Areas','Alert_Home_Size','Alert_Land_Size','RecordIdDuplicate','Record ID','Date de submission','Prix actuel m2', 'Actuel','Type_text', 'Score Idx', 'Min Range', 'Max Range']
   
   var Old_record_ID = data_post.records[0]['fields']['Record ID']
   
