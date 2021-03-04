@@ -9,8 +9,8 @@ if (navigator.userAgent.match(/Mobile/)) {
 $(document).ready(function() {
   const date = new Date($('#date').html());
   const today = new Date();
-  const expiring_date = new Date(moment(date).add(6, 'days'));
-  const expiring_date_2 = new Date(moment(date).add(5, 'days'));
+  const expiring_date = new Date(moment(date).add(4, 'days'));
+  const expiring_date_2 = new Date(moment(date).add(3, 'days'));
   let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
   $('.date').html(expiring_date_2.toLocaleString('fr-FR', options));
   if (today > expiring_date) {
