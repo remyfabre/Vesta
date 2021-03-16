@@ -38,13 +38,17 @@ async function DuplicateAirtableRecord(asktype){
   delete data_post.records[0].id
   delete data_post.records[0].createdTime
   
-  array = ['ID','Label','City','MER','Comission Vesta','Bookings','Vesta Adjusted','Comps','Prix passé m2','Prix actuel m2','Passé','Actuel','Alert_Important_Issues','Alert_Indexes','Alert_Home_Value','Alert_Serviceable_Areas','Alert_Home_Size','Alert_Land_Size','RecordIdDuplicate','Record ID','Date de submission','Prix actuel m2', 'Actuel','Type_text', 'Score Idx', 'Min Range', 'Max Range']
-  
   var Old_record_ID = data_post.records[0]['fields']['Record ID']
   
-  for (const property of array) {
-  	delete data_post.records[0]['fields'][property];
-	}
+   array_2 = ['ID','AVM_Version','Date finale souhaitée de déménagement','Téléphone','Webflow Item ID','Reevaluation','Nouvelles_informations','Record Ancien Deal','Decline','Raison_du_déclin','Feedback Client','Stage','Date_souhaitée','Adresse','Date','Px_final','Vesta','AVMs','Idx_PriceHubble','AVM_PriceHubble','Idx_MA','MA', 'État','Qualité', 'Type', 'Type_text', 'Total_m2', 'Construct_m2', 'Terrain_m2', 'Séjour_m2','Pièces_nb','Sdb_nb','Chbre_nb','Année','DPE', 'Mitoyen', 'Niveaux', 'Étage_total', 'Étage_apt', 'Pkg_nb', 'Box_nb', 'Ascenceur', 'Piscine', 'Sauna', 'Incendie', 'Inondation','Amiante', 'Plomb', 'Pb_foundation', 'Balcon', 'Balcon_m2', 'Terrasse', 'Terrasse_m2', 'Cave', 'Cave_m2', 'Sous-sol', 'Sous-sol_m2', 'ANNEXES', 'ANNEXES_M2', 'Imm_rénovées', 'Raval_récent', 'Assainissement', 'Meublé', 'Cuisine_ét', 'Cuisine_qlé', 'Sdb_ét', 'Sols_ét', 'SOLS_QLÉ', 'Peinture_ét', 'Peinture_qlé', 'Fenêtres_ét', 'VentesComparables 2', 'Fenêtres_qlé', 'Reselling price', 'Bien_loué', 'Spécificité', 'E-mail', 'Nom', 'Prenom','Genre', 'Achat_souhaité', 'Source']
+    
+  for (const [key, value] of Object.entries(data_post.records[0]['fields'])) {
+    if(array_2.includes(key)) {
+    	//pass
+    } else {
+    	delete data_post.records[0]['fields'][key];
+    }
+  }
   
   data_post.records[0]['fields']['ID'] = makeid(14);
   data_post.records[0]['fields']['Reevaluation'] = "Yes"
@@ -58,8 +62,11 @@ async function DuplicateAirtableRecord(asktype){
   data_post.records[0]['fields']['Record Ancien Deal'] = Old_record_ID;
   data_post['typecast'] = true;
   
-  // Duplicate record
-  axios.post(webhook_url, {'url': airtable_url_post,'json_data': data_post})
+  var cookie = data_post.records[0]['fields']['ID']
+  
+  setCookie('ID_cookie',cookie,1);
+  
+  const response_2 = axios.post(webhook_url, {'url': airtable_url_post,'json_data': data_post})
 };
 
 function makeid(length) {
@@ -96,9 +103,9 @@ $(document).ready(function() {
 		CustomerFeedback('overpriced')
   });
   $("#formsubmit").click(function() {
-    if ($("#Message").val()) {
+    if ($("#Message-4").val()) {
     	var radioValue = 'N/A';
-    	var new_info = document.getElementById("Message").value
+    	var new_info = document.getElementById("Message-4").value
       $("#sliderright").click();
       Setreevaluationanddeclined("reevaluation", new_info, radioValue);
       $(".buttonreevaluation").hide();
@@ -145,9 +152,9 @@ async function Checkreevaluationanddeclined(){
   }
 };
 
-function Setreevaluationanddeclined(type, new_info, radioValue) {
+function Setreevaluationanddeclined(type, new_info, radioValue, ID) {
 
-  var ID = window.location.href.substr(window.location.href.length - 17)
+	var ID = getCookie('ID_cookie');
   
   if (type == "reevaluation") {
   	var data = {'fields':{'Reevaluation':'Yes', 'Nouvelles_informations': new_info}}
@@ -600,6 +607,31 @@ function getBrowserSize() {
     'width': w,
     'height': h
   };
+}
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
 $(document).ready(function() {
