@@ -8,7 +8,7 @@ async function CustomerFeedback(type){
   var ID = window.location.href.substr(window.location.href.length - 17)
 
   if (type == "underpriced") {
-    var data = {'fields':{'Feedback Client':'Offre trop basse'}}
+    var data = {'fields':{'Feedback Client':'Offre trop basse', 'Stage' :'Doublon (reevaluation)'}}
     } else if (type == "overpriced") {
       var data = {'fields':{'Feedback Client':'Offre trop haute'}}
       } else {
@@ -55,6 +55,8 @@ async function DuplicateAirtableRecord(asktype){
       delete data_post.records[0]['fields'][key];
     }
   }
+
+  delete data_post.records[0]['fields']['Feedback Client']
 
   data_post.records[0]['fields']['ID'] = makeid(14);
   data_post.records[0]['fields']['Reevaluation'] = "Yes"
