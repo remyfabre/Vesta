@@ -73,9 +73,6 @@ async function DuplicateAirtableRecord(asktype){
   const response_2 = axios.post(webhook_url, {'url': airtable_url_post,'json_data': data_post})
 
   var new_ID = window.location.href.substr(window.location.href.length - 17)
-  var new_ID = 'recLgTiXnroaVQEUp'
-  
-  alert(new_ID)
 
   var new_data = {'fields':{'Stage' :'Doublon (reevaluation)'}}
 
