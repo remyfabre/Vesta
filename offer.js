@@ -8,7 +8,7 @@ async function CustomerFeedback(type){
   var ID = window.location.href.substr(window.location.href.length - 17)
 
   if (type == "underpriced") {
-    var data = {'fields':{'Feedback Client':'Offre trop basse', 'Stage' :'Doublon (reevaluation)'}}
+    var data = {'fields':{'Feedback Client':'Offre trop basse'}}
     } else if (type == "overpriced") {
       var data = {'fields':{'Feedback Client':'Offre trop haute'}}
       } else {
@@ -43,7 +43,7 @@ async function DuplicateAirtableRecord(asktype){
   for (const property of array) {
     delete data_post.records[0]['fields'][property];
   }
-  
+
   var Old_record_ID = data_post.records[0]['fields']['Record ID']
 
   array_2 = ['ID','AVM_Version','Date finale souhaitée de déménagement','Téléphone','Webflow Item ID','Reevaluation','Nouvelles_informations','Record Ancien Deal','Decline','Raison_du_déclin','Feedback Client','Stage','Date_souhaitée','Adresse','Date','Px_final','Vesta','AVMs','Idx_PriceHubble','AVM_PriceHubble','Idx_MA','MA', 'État','Qualité', 'Type', 'Type_text', 'Total_m2', 'Construct_m2', 'Terrain_m2', 'Séjour_m2','Pièces_nb','Sdb_nb','Chbre_nb','Année','DPE', 'Mitoyen', 'Niveaux', 'Étage_total', 'Étage_apt', 'Pkg_nb', 'Box_nb', 'Ascenceur', 'Piscine', 'Sauna', 'Incendie', 'Inondation','Amiante', 'Plomb', 'Pb_foundation', 'Balcon', 'Balcon_m2', 'Terrasse', 'Terrasse_m2', 'Cave', 'Cave_m2', 'Sous-sol', 'Sous-sol_m2', 'ANNEXES', 'ANNEXES_M2', 'Imm_rénovées', 'Raval_récent', 'Assainissement', 'Meublé', 'Cuisine_ét', 'Cuisine_qlé', 'Sdb_ét', 'Sols_ét', 'SOLS_QLÉ', 'Peinture_ét', 'Peinture_qlé', 'Fenêtres_ét', 'VentesComparables 2', 'Fenêtres_qlé', 'Reselling price', 'Bien_loué', 'Spécificité', 'E-mail', 'Nom', 'Prenom','Genre', 'Achat_souhaité', 'Source']
@@ -71,7 +71,18 @@ async function DuplicateAirtableRecord(asktype){
   data_post['typecast'] = true;
 
   const response_2 = axios.post(webhook_url, {'url': airtable_url_post,'json_data': data_post})
-  };
+
+  var new_ID = window.location.href.substr(window.location.href.length - 17)
+  var new_ID = 'recLgTiXnroaVQEUp'
+  
+  alert(new_ID)
+
+  var new_data = {'fields':{'Stage' :'Doublon (reevaluation)'}}
+
+  var new_airtable_url = "https://api.airtable.com/v0/appNvBdQ4vqLJGmuO/Estimation/" + new_ID
+  axios.patch(webhook_url, {'url': new_airtable_url,'json_data': new_data})
+
+};
 
 function makeid(length) {
   var result           = '';
