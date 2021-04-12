@@ -82,7 +82,7 @@ var list_postal_codes = ['59491', '59262', '59800', '59112', '59237', '59200', '
 
 $(document).ready(function() {
   if (!(list_postal_codes.includes(region))) {
-	$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible');
+	//$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible');
   }
 });
 
@@ -202,7 +202,7 @@ $(document).ready(function() {
 		if ($("input[name='hometype']:checked").val()) {
 			$('#startbutton').prop('disabled', false);
 			document.getElementById("startbutton").style.color = "#ffffff";
-			document.getElementById("startbutton").style.backgroundColor = "#1277e1";
+			document.getElementById("startbutton").style.backgroundColor = "#62b3fa";
 			document.getElementById("startbutton").style.opacity = "1";
 		}
 	});
@@ -288,12 +288,12 @@ $(document).ready(function() {
 		if (bool1 == true && bool2 == true) {
 			$('#buttonslide2').prop('disabled', false);
 			buttonslide2.style.color = "#ffffff";
-			buttonslide2.style.backgroundColor = "#1277e1";
+			buttonslide2.style.backgroundColor = "#62b3fa";
 			buttonslide2.style.opacity = "1";
 		} else if (bool4 == true) {
 			$('#buttonslide2').prop('disabled', false);
 			buttonslide2.style.color = "#ffffff";
-			buttonslide2.style.backgroundColor = "#1277e1";
+			buttonslide2.style.backgroundColor = "#62b3fa";
 			buttonslide2.style.opacity = "1";
 		} else {
 			$('#buttonslide2').prop('disabled', true);
@@ -439,7 +439,7 @@ $(document).ready(function() {
 		if ($('#roomcnt').val() && $('#bathroomcnt').val() && $('#bedroomcnt').val()) {
 			$('#buttonslide3').prop('disabled', false);
 			buttonslide3.style.color = "#ffffff";
-			buttonslide3.style.backgroundColor = "#1277e1";
+			buttonslide3.style.backgroundColor = "#62b3fa";
 			buttonslide3.style.opacity = "1";
 		} else {
 			$('#buttonslide3').prop('disabled', true);
@@ -601,7 +601,7 @@ $(document).ready(function() {
 		if ($('#floorscnt').val() && $('#buildingfloorscnt').val() || $('#housefloorscnt').val()) {
 			$('#buttonslide4').prop('disabled', false);
 			buttonslide4.style.color = "#ffffff";
-			buttonslide4.style.backgroundColor = "#1277e1";
+			buttonslide4.style.backgroundColor = "#62b3fa";
 			buttonslide4.style.opacity = "1";
 		} else {
 			$('#buttonslide4').prop('disabled', true);
@@ -654,7 +654,7 @@ $(document).ready(function() {
 		if ($('#boxgaragecnt').val() && $('#garagecarcnt').val()) {
 			$('#buttonslide5').prop('disabled', false);
 			buttonslide6.style.color = "#FFFFFF";
-			buttonslide6.style.backgroundColor = "#1277E1";
+			buttonslide6.style.backgroundColor = "#62b3fa";
 			buttonslide6.style.opacity = "1";
 		} else {
 			$('#buttonslide5').prop('disabled', true);
@@ -687,7 +687,7 @@ $(document).ready(function() {
     if($("input[type='checkbox']:checked").val()){
       $('#buttonslide6').prop('disabled', false);
       buttonslide6.style.color = "#FFFFFF";
-      buttonslide6.style.backgroundColor = "#1277E1";
+      buttonslide6.style.backgroundColor = "#62b3fa";
       buttonslide6.style.opacity = "1";
     } else {
       $('#buttonslide6').prop('disabled', true);
@@ -710,7 +710,7 @@ $(document).ready(function() {
     if($("input[id='checkboxslide8']:checked").val()){
       $('#buttonslide7').prop('disabled', false);
       buttonslide7.style.color = "#FFFFFF";
-      buttonslide7.style.backgroundColor = "#1277E1";
+      buttonslide7.style.backgroundColor = "#62b3fa";
       buttonslide7.style.opacity = "1";
     } else {
       $('#buttonslide7').prop('disabled', true);
@@ -722,8 +722,7 @@ $(document).ready(function() {
 });
 
 $('.buttonslideradio').prop('disabled', true);
-$('.buttonslideradio').css({"background-color": "#F8F6F4", "color": "#62636B", "opacity": "0.5"});
-
+$('.buttonslideradio').css({"background-color": "#62b3fa", "color": "#62636B", "opacity": "0.5"});
 
 var dataName = [
   "kitchenquality",
@@ -748,7 +747,7 @@ $(document).ready(function() {
       var input = 'input[name=' + "'" + dataName[i] + "'" + ']:checked';
       if($(input).val()) {
         $("#buttonslideradio" + (i + 1)).prop('disabled', false);
-        $("#buttonslideradio" + (i + 1)).css({"background-color": "#1277E1", "color": "#FFFFFF", "opacity": "1"});
+        $("#buttonslideradio" + (i + 1)).css({"background-color": "#62b3fa", "color": "#FFFFFF", "opacity": "1"});
       } else {
         $("#buttonslideradio" + (i + 1)).prop('disabled', true);
         $("#buttonslideradio" + (i + 1)).css({"background-color": "#F8F6F4", "color": "#62636B", "opacity": "0.5"});
