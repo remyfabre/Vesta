@@ -1,9 +1,11 @@
-$("#google-map").append("<input type='text' onkeyup='patternMatching()' onfocus='initAutocomplete()' name='Home-Address-2' data-name='Home Address 2' placeholder='Entrez l’adresse de votre bien' id='autocomplete' value='' pattern='.*France' required='' oninvalid='this.setCustomValidity('Nous n’avons pas pu trouver cette adresse. Essayez d’actualiser la page. Ou essayez de ne pas ajouter de préfixe tel que bis.'>");
-
-$("#google-map").addClass("Input-El")
-
 object = document.getElementById("goingnext")
+
+object.type = "submit"
+
+$("#goingnext").addClass("html-embed-2 homepage button-3-offer button-block-3 bg-primary-3-offer w-button")
+
 object.addEventListener("click", ErrorMessage);
+
 function ErrorMessage() {
   if (!document.getElementById("autocomplete").value.match(/^\d/)) {
     document.getElementById("card-body-2").style.display = 'block';
@@ -11,17 +13,6 @@ function ErrorMessage() {
       document.getElementById("card-body-2").style.display = 'none';
     }, 5000);
   }
-}
-
-if (navigator.userAgent.match(/Mobile/)) {
-  document.getElementById('goingnext').value = 'Go';
-}
-
-document.getElementById("truspilot-1").onclick = function() {redirect()};
-document.getElementById("truspilot-2").onclick = function() {redirect()};
-function redirect() {
-  var url = "https://fr.trustpilot.com/review/wevesta.com";
-  window.open(url, '_blank');
 }
 
 var counter = 0;
@@ -139,7 +130,6 @@ function fillInAddress() {
   //alert(document.getElementById('autocomplete').innerHTML);
   if (document.getElementById("autocomplete").value.match(/^\d/)) {
     var place = autocomplete.getPlace();
-    document.getElementById("goingnext").value = "Chargement.."
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the cookie.
     for (var i = 0; i < place.address_components.length; i++) {
@@ -149,10 +139,11 @@ function fillInAddress() {
         // Store the home address in a cookie
         var homecookie = addressType + "=" + val;
         var path = "path=/"
+        alert(homecookie + ';' + path)
         document.cookie = homecookie + ';' + path;
       }
     }
-    window.location.assign("https://wevesta.com/offre/formulaire-vendeur-prospect");
+    window.location.assign("https://zefir-4f7ae76c36850c72251-c11aa8e2cbacb.webflow.io/offre/demande");
   } else {
     ErrorMessage();
   }
@@ -174,6 +165,7 @@ var pac_input = document.getElementById('autocomplete');
         var suggestion_selected = $(".pac-item-selected").length > 0;
         document.getElementById('goingnext').onclick = function() {
           if (!suggestion_selected && document.getElementById("autocomplete").value.match(/^\d/)) {
+          	alert("I went there")
             var simulated_downarrow = $.Event("keydown", {keyCode:40, which:40});
             var event = $.Event("enter", {keyCode:13, which:13})
             orig_listener.apply(input, [simulated_downarrow]);
