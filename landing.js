@@ -91,7 +91,7 @@ function createCookie(name, value, days) {
 // place, then it retrieves the address components associated with that
 // place, and then it populates the form fields with those details.
 
-var placeSearch, autocomplete;
+var placeSearch, autocomplete, autocomplete_2;
 
 var componentForm = {
   street_number: 'short_name',
@@ -106,8 +106,8 @@ function initAutocomplete() {
   // Create the autocomplete object, restricting the search predictions to
   // adresses and France.
   // Address must start with a number to start Autocomplete
+  
   var input = document.getElementById('autocomplete');
-  var input_2 = document.getElementById('autocomplete_2');
 
   var options = {
     types: ['address'],
@@ -115,16 +115,35 @@ function initAutocomplete() {
   };
 
   autocomplete = new google.maps.places.Autocomplete(input, options);
-  autocomplete_2 = new google.maps.places.Autocomplete(input_2, options);
 
   // Avoid paying for data that you don't need by restricting the set of
   // place fields that are returned to just the address components.
   autocomplete.setFields(['address_component']);
-  autocomplete_2.setFields(['address_component']);
-
+  
   // When the user selects an address from the drop-down, save the
   // address fields in local storage.
   autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function initAutocomplete_2() {
+  // Create the autocomplete object, restricting the search predictions to
+  // adresses and France.
+  // Address must start with a number to start Autocomplete
+  var input = document.getElementById('autocomplete_2');
+
+  var options = {
+    types: ['address'],
+    componentRestrictions: {country: 'fr'},
+  };
+
+  autocomplete_2 = new google.maps.places.Autocomplete(input, options);
+
+  // Avoid paying for data that you don't need by restricting the set of
+  // place fields that are returned to just the address components.
+  autocomplete_2.setFields(['address_component']);
+  
+  // When the user selects an address from the drop-down, save the
+  // address fields in local storage.
   autocomplete_2.addListener('place_changed', fillInAddress_2);
 }
 
@@ -139,11 +158,24 @@ function patternMatching() {
   }
 }
 
+function patternMatching_2() {
+  // Show and Hide the Google Autocomplete based on input values
+  // Addresses must to start with a number
+  var x = document.getElementById("autocomplete_2").value;
+  if (!$("#autocomplete_2").val()) {
+    initAutocomplete_2();
+  } else if (!x.match(/^\d/)) {
+    $(".pac-container").remove();
+  }
+}
+
 function fillInAddress() {
   // Get the place details from the autocomplete object.
   //alert(document.getElementById('autocomplete').innerHTML);
+  alert(document.getElementById("autocomplete").value)
   if (document.getElementById("autocomplete").value.match(/^\d/)) {
     var place = autocomplete.getPlace();
+    alert(JSON.stringify(place.address_components[1]))
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the cookie.
     for (var i = 0; i < place.address_components.length; i++) {
@@ -153,7 +185,6 @@ function fillInAddress() {
         // Store the home address in a cookie
         var homecookie = addressType + "=" + val;
         var path = "path=/"
-        alert(homecookie + ';' + path)
         document.cookie = homecookie + ';' + path;
       }
     }
@@ -167,13 +198,14 @@ function fillInAddress_2() {
   // Get the place details from the autocomplete object.
   //alert(document.getElementById('autocomplete').innerHTML);
   if (document.getElementById("autocomplete_2").value.match(/^\d/)) {
-    var place = autocomplete_2.getPlace();
+    var place_2 = autocomplete.getPlace();
+    alert("Yoloooooo")
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the cookie.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
+    for (var i = 0; i < place_2.address_components.length; i++) {
+      var addressType = place_2.address_components[i].types[0];
       if (componentForm[addressType]) {
-        var val = encodeURIComponent(place.address_components[i][componentForm[addressType]]);
+        var val = encodeURIComponent(place_2.address_components[i][componentForm[addressType]]);
         // Store the home address in a cookie
         var homecookie = addressType + "=" + val;
         var path = "path=/"
