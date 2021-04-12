@@ -171,11 +171,8 @@ function patternMatching_2() {
 
 function fillInAddress() {
   // Get the place details from the autocomplete object.
-  //alert(document.getElementById('autocomplete').innerHTML);
-  alert(document.getElementById("autocomplete").value)
   if (document.getElementById("autocomplete").value.match(/^\d/)) {
     var place = autocomplete.getPlace();
-    alert(JSON.stringify(place.address_components[1]))
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the cookie.
     for (var i = 0; i < place.address_components.length; i++) {
@@ -196,10 +193,7 @@ function fillInAddress() {
 
 function fillInAddress_2() {
   // Get the place details from the autocomplete object.
-  //alert(document.getElementById('autocomplete').innerHTML);
-  alert("Yoloooooo")
   if (document.getElementById("autocomplete_2").value.match(/^\d/)) {
-  	alert("Yoloooooo")
     var place_2 = autocomplete.getPlace();
     var place_2
     // Get each component of the address from the place details,
@@ -211,7 +205,6 @@ function fillInAddress_2() {
         // Store the home address in a cookie
         var homecookie = addressType + "=" + val;
         var path = "path=/"
-        alert(homecookie + ';' + path)
         document.cookie = homecookie + ';' + path;
       }
     }
