@@ -1,3 +1,7 @@
+var redirection_offer_zefir_url = 'https://www.zefir.fr/offre-zefir/' + window.location.href.substr(window.location.href.length - 17)
+
+$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible')
+
 document.getElementById("loading").addEventListener("load", redirect());
 
 webhook_url = 'https://kvkjg46so8.execute-api.eu-west-3.amazonaws.com/GO';
