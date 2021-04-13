@@ -1,3 +1,10 @@
+var str = window.location.href.substr(window.location.href.length - 17)
+var res = str.toLowerCase();
+
+var redirection_offer_zefir_url = 'https://www.zefir.fr/offre-finale/' + res
+
+$(location).attr('href', redirection_offer_zefir_url)
+
 document.getElementById("loading").addEventListener("load", redirect());
 
 if (navigator.userAgent.match(/Mobile/)) {
