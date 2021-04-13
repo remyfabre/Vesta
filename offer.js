@@ -1,6 +1,6 @@
 var redirection_offer_zefir_url = 'https://www.zefir.fr/offre-zefir/' + window.location.href.substr(window.location.href.length - 17)
 
-$(location).attr('href', 'https://www.wevesta.com/offre/non-eligible')
+$(location).attr('href', redirection_offer_zefir_url)
 
 document.getElementById("loading").addEventListener("load", redirect());
 
